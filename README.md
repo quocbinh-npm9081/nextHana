@@ -5,11 +5,11 @@
 ### 1. Tổng quan về Hanastore:
   Hanastore là một cửa hàng lớn cung cấp sản phẩm chính hãng( mỹ phẩm, trang sức, túi xách, quần áo và thực phẩm chức năng,...) với chất lượng cao, đa dạng mẫu mã và giá cả hợp lý. 
   
-  Cơ cấu cửa hàng bao gồm: Quản lý( bao gồm kế toán) ,Bộ phận bán hàng và bộ phận nhập kho.
+  Cơ cấu cửa hàng bao gồm: Quản lý kiêm kế toán, bộ phận bán hàng và bộ phận nhập kho.
   
   Khách hàng của shop được chia làm 2 loại:
   
-    -Khách hàng thường xuyên( khách hàng tiềm năng): những cửa hàng, đại lý... đặt hàng định kì).
+    -Khách hàng thường xuyên( khách hàng tiềm năng): những cửa hàng, đại lý... đặt hàng định kì.
     
     -Khách hàng không thường xuyên: Khách mua lẻ, có thể mua trực tiếp tại shop
     
