@@ -3,7 +3,7 @@
 ## PHẦN I: KHẢO SÁT HIỆN TRẠNG HỆ THỐNG:
 
 ### 1. Tổng quan về Hanastore:
-  Hanastore là một cửa hàng lớn cung cấp sản phẩm sách tay từ Mỹ (Mỹ Phẩm, Trang Sức,Túi xách, Quần Áo và Thực phẩm chức năng,...) với chất lượng cao, đa dạng mẫu mã và giá cả hợp lý. 
+  Hanastore là một cửa hàng lớn cung cấp sản phẩm chính hảng từ Mỹ (Mỹ Phẩm, Trang Sức,Túi xách, Quần Áo và Thực phẩm chức năng,...) với chất lượng cao, đa dạng mẫu mã và giá cả hợp lý. 
   
   Cơ cấu cửa hàng bao gồm: Quản lý( bao gồm kế toán) ,Bộ phận bán hàng và bộ phận nhập kho.
   
@@ -13,11 +13,11 @@
     
     -Khách hàng không thường xuyên: Khách mua lẻ, có thể mua trực tiếp tại shop
     
-  Nhu cầu mở rộng thị trường cũng như quảng bá sản phẩm và nâng cao chất lượng, tăng doanh thu là vấn đề đáng quan tâm của shop. Vì vậy quản lí của shop có mong muốn xây dựng 1 website giới thiệu sản phẩm và bán bánh trực tuyến, cũng như hỗ trợ khách hàng các thông tin cần thiết
+  Nhu cầu mở rộng thị trường cũng như quảng bá sản phẩm và nâng cao chất lượng, tăng doanh thu là vấn đề đáng quan tâm của shop. Vì vậy quản lí của shop có mong muốn xây dựng 1 website giới thiệu sản phẩm và bán hàng trực tuyến, cũng như hỗ trợ khách hàng các thông tin cần thiết.
   
 ### 2. Tổng quan công nghệ:
  
- **Với phương châm <sub>“Vừa lòng khách đến, vui lòng khách đi”</sub> , shop không ngừng nỗ lực nhằm mang lại sản phẩm cũng như sự phục vụ tốt nhất cho khách hàng.**
+ **Với phương châm <sub>“Trải nghiệm tốt của khách hàng chính là khởi đầu cho sự gắn bó cùng HanaStore”</sub> , shop không ngừng nỗ lực nhằm mang lại sản phẩm cũng như sự phục vụ tốt nhất cho khách hàng.**
  
  **Front-End:**
  
@@ -44,7 +44,7 @@
 ## PHẦN II: MỤC TIÊU XÂY DỰNG WEBSITE:
 
 
-1.Đối tượng của Website được xây dựng phục vụ hai đối tượng chính là Admin( nhà quản trị) và Khách hàng với các chức năng sau:
+### 1.Đối tượng của Website được xây dựng phục vụ hai đối tượng chính là Admin( nhà quản trị) và Khách hàng với các chức năng sau:
 
 **Admin:**
   
