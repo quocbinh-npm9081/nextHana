@@ -74,7 +74,7 @@ User:
 
 2.Đặc điểm:
 
-Xây dựng một hệ thống bán sản phẩm trực tuyến đơn giản, thân thiện, dễ sử dụng, cho phép khác hàng xem thông tin và đặt hàng qua mạng, người quản trị quản lý các thông tin về sản phẩm cũng như người dùng
+Xây dựng một hệ thống bán hàng trực tuyến đơn giản, thân thiện, dễ sử dụng, cho phép khác hàng xem thông tin và đặt hàng qua mạng, người quản trị quản lý các thông tin về sản phẩm cũng như người dùng
 
 Website được thiết kế với
 
