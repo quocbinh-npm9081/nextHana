@@ -3,7 +3,7 @@
 ## PHẦN I: KHẢO SÁT HIỆN TRẠNG HỆ THỐNG:
 
 ### 1. Tổng quan về Hanastore:
-  Hanastore là một cửa hàng lớn cung cấp sản phẩm chính hãng( mỹ Phẩm, trang sức, túi xách, Quần Áo và Thực phẩm chức năng,...) với chất lượng cao, đa dạng mẫu mã và giá cả hợp lý. 
+  Hanastore là một cửa hàng lớn cung cấp sản phẩm chính hãng( mỹ Phẩm, trang sức, túi xách, quần áo và thực phẩm chức năng,...) với chất lượng cao, đa dạng mẫu mã và giá cả hợp lý. 
   
   Cơ cấu cửa hàng bao gồm: Quản lý( bao gồm kế toán) ,Bộ phận bán hàng và bộ phận nhập kho.
   
