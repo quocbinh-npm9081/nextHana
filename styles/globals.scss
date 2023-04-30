@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Castoro+Titling&display=swap");
+@layer base {
+  html {
+    /* ['Helvetica', 'Arial', 'sans-serif'] */
+    font-family: Helvetica, system-ui, sans-serif;
+  }
+}
+
+input,
+select,
+textarea {
+  @apply rounded;
+}
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+.swiper-button-next,
+.swiper-button-prev {
+  color: #0f172a !important;
+}
+.banner {
+  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 500px !important;
+  }
+
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+/* thumbnail product */
+.product-images-slider {
+  .swiper-slide {
+    padding-top: 73%;
+    @apply overflow-hidden relative;
+    img {
+      @apply absolute top-0 left-0 w-full;
+    }
+  }
+}
+.product-images-slider-thumbs {
+  @apply mt-3;
+  .swiper-slide {
+    @apply cursor-pointer	opacity-60;
+    &-thumb-active {
+      @apply opacity-100 border-2;
+    }
+  }
+}
+
+.webkit-line-clamp-truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card {
+  @apply mb-5 block rounded-sm  shadow-sm;
+}
+
+.card-category {
+  @apply h-48 overflow-hidden;
+}
+.breakcrumb_title {
+  @apply font-bold text-2xl;
+}
+.breakcrumb_list {
+  @apply flex flex-row;
+}
+.breakcrumb_list li:first-child {
+  @apply mr-2 ml-0;
+}
+.breakcrumb_list li {
+  @apply mr-2 ml-2;
+}
+.breakcrumb_list li:last-child {
+  @apply mr-0 ml-2;
+}
+
+.brandHana {
+  font-family: "Castoro Titling", cursive;
+}
+
+.primary-button {
+  @apply bg-black hover:bg-slate-900 text-white font-bold py-2 px-4 rounded;
+}
