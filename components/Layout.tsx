@@ -4,6 +4,7 @@ import Link from "next/link";
 import CardScreen from "./CardScreen";
 import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
+import Loading from "./Loading";
 
 interface IProps {
   title: string | undefined;
@@ -33,7 +34,7 @@ export default function Layout({ title, children }: IProps) {
             <div className="flex items-center">
               <CardScreen />
               {status === "loading" ? (
-                "Loading"
+                <Loading />
               ) : session?.user ? (
                 session?.user.name
               ) : (

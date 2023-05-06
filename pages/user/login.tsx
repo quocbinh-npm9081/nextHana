@@ -9,6 +9,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SignInResponse, signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { BsFacebook } from "react-icons/bs";
 const Login = () => {
   const { data: session } = useSession();
   const router = useRouter();
@@ -85,7 +86,7 @@ const Login = () => {
   return (
     <Layout title="Login">
       <div
-        className="min-w-screen min-h-screen  mx-auto flex items-center justify-center overflow-hidden"
+        className="min-w-screen min-h-screen flex-col mx-auto flex items-center justify-center overflow-hidden"
         style={{
           backgroundPosition: "center",
           backgroundSize: "cover",
@@ -180,6 +181,21 @@ const Login = () => {
                 Bạn chưa có tài khoản? Đăng kí
               </a>
             </Link>
+          </div>
+          <div className="mt-8 flex flex-col items-center">
+            <div className="flex justify-between items-center w-full">
+              <hr className="w-full border-gray-400" />
+              <span className="p-1 text-sm text-gray-400 mb-1">Hoặc</span>
+              <hr className="w-full  border-gray-400" />
+            </div>
+
+            <div className="cursor-pointer m-2">
+              <BsFacebook
+                size={40}
+                color="#039BE5"
+                onClick={() => signIn("facebook")}
+              />
+            </div>
           </div>
         </form>
       </div>{" "}
