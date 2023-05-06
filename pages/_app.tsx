@@ -11,7 +11,7 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={session} refetchInterval={5 * 60}>
       <Provider store={store}>
         <Component {...pageProps} />
         <ToastContainer />

@@ -60,7 +60,7 @@ const Login = () => {
           theme: "dark",
         });
       }
-      console.log("result: ", signInErrorInfo?.error);
+      console.log("result: ", result);
     } catch (err) {
       toast.error(String(err), {
         position: "top-right",

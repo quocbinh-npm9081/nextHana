@@ -46,7 +46,7 @@ export interface IPayloadActionCart {
 
 export interface IUserCredentials {
   _id?: string;
-  username?: string;
+  name?: string;
   phoneNumber: string;
   password: string;
   isAdmin?: boolean;

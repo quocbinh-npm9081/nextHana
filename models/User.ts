@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 interface IUserSchema {
-  username: string;
+  name: string;
   phoneNumber: string;
   password: string;
   isAdmin: boolean;
@@ -9,7 +9,7 @@ interface IUserSchema {
 
 const userSchema = new mongoose.Schema(
   {
-    username: { type: String, required: true },
+    name: { type: String, required: true },
     phoneNumber: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     isAdmin: { type: Boolean, require: true, default: false },

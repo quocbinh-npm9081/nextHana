@@ -35,7 +35,7 @@ export default function Layout({ title, children }: IProps) {
               {status === "loading" ? (
                 "Loading"
               ) : session?.user ? (
-                session?.user.username
+                session?.user.name
               ) : (
                 <Link href="/user/login">Login</Link>
               )}
