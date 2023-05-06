@@ -30,12 +30,10 @@ export default NextAuth({
         });
         console.log("user, ", user);
 
-        //await db.mongoDB.disconnect();
-        console.log(bcrypt.compareSync(password, user.password));
-
+        await db.mongoDB.disconnect();
+        if (!user || !bcrypt.compareSync(password, user.password))
+          throw new Error("Số điện thoại hoặc mật khẩu không đúng !");
         if (user && bcrypt.compareSync(password, user.password)) return user;
-
-        //  throw new Error("Invaild credentials !");
       },
     }),
   ],
@@ -55,7 +53,6 @@ export default NextAuth({
       if (token?._id) session.user._id = token._id as string;
       if (token?.isAdmin || session.user.isAdmin)
         session.user.isAdmin = token.isAdmin as boolean;
-
       return session;
     },
   },

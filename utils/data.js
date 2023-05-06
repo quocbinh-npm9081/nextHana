@@ -119,13 +119,13 @@ const data = {
   ],
   users: [
     {
-      name: "Binh",
+      username: "Binh",
       phoneNumber: "0326732670",
       password: bcrypt.hashSync("12345678"),
       isAdmin: true,
     },
     {
-      name: "An",
+      username: "An",
       phoneNumber: "0979853419",
       password: bcrypt.hashSync("0987654321"),
       isAdmin: false,

@@ -30,10 +30,12 @@ export default function Layout({ title, children }: IProps) {
             <Link href="/" legacyBehavior>
               <a className="text-2xl font-bold brandHana">Hana</a>
             </Link>
-            <div className="flex">
+            <div className="flex items-center">
               <CardScreen />
               {status === "loading" ? (
                 "Loading"
+              ) : session?.user ? (
+                session?.user.username
               ) : (
                 <Link href="/user/login">Login</Link>
               )}

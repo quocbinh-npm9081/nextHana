@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signIn, useSession } from "next-auth/react";
+import { SignInResponse, signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 const Login = () => {
@@ -32,15 +32,35 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm({ resolver: yupResolver(shemaLogin) });
 
   const onSubmit = async (data: any) => {
     const { phoneNumber, password } = data;
     try {
-      const result = await signIn("credentials", { phoneNumber, password });
-      console.log("result: ", result);
+      const result = await signIn("credentials", {
+        redirect: false,
+        phoneNumber,
+        password,
+      });
+      const signInErrorInfo: SignInResponse | undefined = result;
+      if (signInErrorInfo?.error) {
+        reset({
+          password: "",
+        });
+        toast.error(String(signInErrorInfo?.error), {
+          position: "top-right",
+          autoClose: 1500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      }
+      console.log("result: ", signInErrorInfo?.error);
     } catch (err) {
       toast.error(String(err), {
         position: "top-right",
