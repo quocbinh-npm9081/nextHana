@@ -13,6 +13,8 @@ import { BsFacebook } from "react-icons/bs";
 const Login = () => {
   const { data: session } = useSession();
   const router = useRouter();
+  const { redirect } = router.query;
+
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -77,9 +79,8 @@ const Login = () => {
   };
   useEffect(() => {
     if (session?.user) {
-      console.log("session?.user: ", session?.user);
-
-      router.push("/");
+      if (redirect) router.push(String(redirect));
+      else router.push("/");
     }
   }, [router, session]);
 

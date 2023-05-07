@@ -8,7 +8,7 @@ interface IProps {
 
 const Grid = ({ children }: IProps) => {
   return (
-    <div className="mt-10 p-1 grid gap-4 md:grid-cols-3 lg:grid-cols-4">
+    <div className="mt-10 p-2 grid gap-4 md:grid-cols-3 lg:grid-cols-4">
       <>{children}</>
     </div>
   );

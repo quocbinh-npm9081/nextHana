@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useEffect } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import CardScreen from "./CardScreen";
@@ -34,7 +34,7 @@ export default function Layout({ title, children }: IProps) {
             <div className="flex items-center">
               <CardScreen />
               {status === "loading" ? (
-                <Loading />
+                <>loading...</>
               ) : session?.user ? (
                 session?.user.name
               ) : (
@@ -45,9 +45,10 @@ export default function Layout({ title, children }: IProps) {
         </header>
         <main
           className={
-            asPath !== "/user/login"
-              ? "md:mt-28 container m-auto mt-4 px-4"
-              : ""
+            asPath === "/user/login" ||
+            asPath === "/user/login?redirect=/shipping"
+              ? ""
+              : "md:mt-28 container m-auto mt-4 px-4"
           }
         >
           {children}
