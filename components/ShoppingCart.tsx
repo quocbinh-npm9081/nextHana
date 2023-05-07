@@ -415,7 +415,7 @@ const ShoppingCart = () => {
                 </div>
                 <button
                   // Always do navigations after the first render
-                  onClick={() => router.push("login?redirect=/shipping")}
+                  onClick={() => router.push("login?redirect=/user/shipping")}
                   className=" font-semibold  py-3 text-sm text-white uppercase w-full primary-button"
                 >
                   Checkout

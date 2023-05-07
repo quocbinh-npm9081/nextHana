@@ -33,7 +33,7 @@ export default function Layout({ title, children }: IProps) {
             <Link href="/" legacyBehavior>
               <a className="text-2xl font-bold brandHana">Hana</a>
             </Link>
-            <div className="flex items-center">
+            <div className="flex justify-center items-center">
               <CardScreen />
               {status === "loading" ? (
                 <>loading...</>
@@ -48,7 +48,7 @@ export default function Layout({ title, children }: IProps) {
         <main
           className={
             asPath === "/user/login" ||
-            asPath === "/user/login?redirect=/shipping"
+            asPath === "/user/login?redirect=/user/shipping"
               ? ""
               : "md:mt-28 container m-auto mt-4 px-4"
           }

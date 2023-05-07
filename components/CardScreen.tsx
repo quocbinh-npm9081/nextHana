@@ -6,10 +6,9 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 const CardScreen = () => {
   const { cart } = useAppSelector(selectCart);
-
   return (
     <Link href="/user/cart" legacyBehavior>
-      <a className="p-2">
+      <a className="px-6 py-2">
         {cart.cartItems.length == 0 && (
           <svg
             xmlns="http://www.w3.org/2000/svg"
