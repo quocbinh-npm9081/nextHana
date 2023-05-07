@@ -6,6 +6,8 @@ import { useRouter } from "next/router";
 import { signIn, useSession } from "next-auth/react";
 import Loading from "./Loading";
 
+import MenuUserDropDown from "./MenuUserDropDown";
+
 interface IProps {
   title: string | undefined;
   children?: React.ReactNode;
@@ -36,7 +38,7 @@ export default function Layout({ title, children }: IProps) {
               {status === "loading" ? (
                 <>loading...</>
               ) : session?.user ? (
-                session?.user.name
+                <MenuUserDropDown title={String(session?.user.name)} />
               ) : (
                 <Link href="/user/login">Login</Link>
               )}
