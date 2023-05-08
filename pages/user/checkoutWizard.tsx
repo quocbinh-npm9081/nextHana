@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Tab } from "@headlessui/react";
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 
 interface IProps {
   activeSet?: number;
@@ -63,6 +65,32 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
       },
     ],
   });
+  const phoneRegExp =
+    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  const shemaLogin = yup.object().shape({
+    phoneNumber: yup
+      .string()
+      .matches(phoneRegExp, "Vui lòng nhập số điện thoại chính xác !")
+      .required("Vui lòng nhập số điện thoại !")
+      .min(10, "Vui lòng nhập số điện thoại chính xác !")
+      .max(12, "Vui lòng nhập số điện thoại chính xác !"),
+    name: yup
+      .string()
+      .required("Vui lòng nhập tên đầy đủ")
+      .max(12, "Tên không được dài quá 12 kí tự"),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(shemaLogin) });
+
+  const onSubmit = (data: any) => {
+    console.log("onSubmit: ", data);
+  };
 
   return (
     <div className="w-full  px-2 py-16 sm:px-0">
@@ -105,27 +133,30 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                         <p>Please fill out all the fields.</p>
                       </div>
 
-                      <div className="lg:col-span-2">
+                      <form
+                        onSubmit={handleSubmit(onSubmit)}
+                        className="lg:col-span-2"
+                      >
                         <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                           <div className="md:col-span-5">
                             <label htmlFor="name">Tên người đặt hàng</label>
                             <input
+                              {...register("name")}
                               type="text"
                               name="name"
                               id="name"
                               className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                              value=""
                             />
                           </div>
 
                           <div className="md:col-span-5">
-                            <label htmlFor="phonenumber">Số điện thoại</label>
+                            <label htmlFor="phoneNumber">Số điện thoại</label>
                             <input
                               type="text"
-                              name="phonenumber"
-                              id="phonenumber"
+                              {...register("phoneNumber")}
+                              name="phoneNumber"
+                              id="phoneNumber"
                               className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                              value=""
                               placeholder="03267..."
                             />
                           </div>
@@ -139,7 +170,6 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                               name="address"
                               id="address"
                               className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                              value=""
                               placeholder=""
                             />
                           </div>
@@ -222,7 +252,6 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                               name="city"
                               id="city"
                               className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                              value=""
                               placeholder=""
                             />
                           </div>
@@ -235,7 +264,6 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                               id="zipcode"
                               className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                               placeholder=""
-                              value=""
                             />
                           </div>
                           {/* 
@@ -261,7 +289,7 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </form>
                     </div>
                   </div>
                 </div>
