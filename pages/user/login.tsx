@@ -161,6 +161,7 @@ const Login = () => {
             <label
               className="block text-gray-700 text-sm font-bold "
               htmlFor="remember"
+              id="remember"
             >
               Nhớ tài khoản này
             </label>

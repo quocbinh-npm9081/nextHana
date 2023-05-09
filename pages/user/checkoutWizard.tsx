@@ -3,7 +3,7 @@ import { Tab } from "@headlessui/react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
+import { useSession } from "next-auth/react";
 interface IProps {
   activeSet?: number;
 }
@@ -74,11 +74,15 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
       .matches(phoneRegExp, "Vui lòng nhập số điện thoại chính xác !")
       .required("Vui lòng nhập số điện thoại !")
       .min(10, "Vui lòng nhập số điện thoại chính xác !")
-      .max(12, "Vui lòng nhập số điện thoại chính xác !"),
+      .max(13, "Vui lòng nhập số điện thoại chính xác !"),
     name: yup
       .string()
-      .required("Vui lòng nhập tên đầy đủ")
-      .max(12, "Tên không được dài quá 12 kí tự"),
+      .required("Vui lòng nhập tên đầy đủ !")
+      .max(12, "Tên không được dài quá 12 kí tự !"),
+    address: yup
+      .string()
+      .required("Vui lòng nhập địa chỉ nhận hàng !")
+      .min(8, "Địa chỉ nhận hàng không hợp lệ !"),
   });
 
   const {
@@ -138,6 +142,7 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                         className="lg:col-span-2"
                       >
                         <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                          {/* NAME */}
                           <div className="md:col-span-5">
                             <label htmlFor="name">Tên người đặt hàng</label>
                             <input
@@ -149,6 +154,7 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                             />
                           </div>
 
+                          {/* PHONE NUMBER */}
                           <div className="md:col-span-5">
                             <label htmlFor="phoneNumber">Số điện thoại</label>
                             <input
@@ -161,6 +167,7 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                             />
                           </div>
 
+                          {/* ADDRESS */}
                           <div className="md:col-span-3">
                             <label htmlFor="address">
                               Địa chỉ / Số nhà/ Tên đường
@@ -174,53 +181,7 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                             />
                           </div>
 
-                          <div className="md:col-span-2">
-                            <label htmlFor="village">Xã /phường</label>
-
-                            <div className="relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                              <select
-                                name="village"
-                                className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                id="village"
-                              >
-                                <option>New Mexico</option>
-                                <option>Missouri</option>
-                                <option>Texas</option>
-                              </select>
-                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black">
-                                <svg
-                                  className="fill-current h-4 w-4"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="md:col-span-2">
-                            <label htmlFor="district">Quận/ Huyện</label>
-                            <div className="relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                              <select
-                                name="district"
-                                className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
-                                id="district"
-                              >
-                                <option>New Mexico</option>
-                                <option>Missouri</option>
-                                <option>Texas</option>
-                              </select>
-                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black">
-                                <svg
-                                  className="fill-current h-4 w-4"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  viewBox="0 0 20 20"
-                                >
-                                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                              </div>
-                            </div>
-                          </div>
+                          {/* PROVINCE */}
                           <div className="md:col-span-2">
                             <label htmlFor="province">Tỉnh</label>
                             <div className="relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
@@ -245,15 +206,55 @@ export default function CheckoutWizard({ activeSet = 0 }: IProps) {
                             </div>
                           </div>
 
+                          {/* DISTRICT */}
                           <div className="md:col-span-2">
-                            <label htmlFor="city">Thành Phố</label>
-                            <input
-                              type="text"
-                              name="city"
-                              id="city"
-                              className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                              placeholder=""
-                            />
+                            <label htmlFor="district">Quận/ Huyện</label>
+                            <div className="relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                              <select
+                                name="district"
+                                className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                id="district"
+                              >
+                                <option>New Mexico</option>
+                                <option>Missouri</option>
+                                <option>Texas</option>
+                              </select>
+                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black">
+                                <svg
+                                  className="fill-current h-4 w-4"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* WARDS */}
+                          <div className="md:col-span-2">
+                            <label htmlFor="wards">Xã /phường</label>
+
+                            <div className="relative h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
+                              <select
+                                name="wards"
+                                className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
+                                id="wards"
+                              >
+                                <option>Ninh Sim</option>
+                                <option>Ninh Tây</option>
+                                <option>Ninh Trung</option>
+                              </select>
+                              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-black">
+                                <svg
+                                  className="fill-current h-4 w-4"
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  viewBox="0 0 20 20"
+                                >
+                                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                </svg>
+                              </div>
+                            </div>
                           </div>
 
                           <div className="md:col-span-1">

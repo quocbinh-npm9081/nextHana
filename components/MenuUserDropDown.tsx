@@ -2,6 +2,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { Fragment, useRef } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import DropDownLink from "./DropDownLink";
+import { signOut } from "next-auth/react";
 
 interface IProps {
   title: string;
@@ -11,7 +12,11 @@ function MenuUserDropDown({ title }: IProps) {
   const menuItems = useRef([
     { title: "Thông tin cá nhân", href: "user/profile" },
     { title: "Lịch sử mua hàng", href: "user/order-history" },
-    { title: "Đăng xuất", href: "user/logout" },
+    {
+      title: "Đăng xuất",
+      href: "#",
+      clickHandle: () => signOut({ callbackUrl: "/user/login" }),
+    },
   ]);
 
   return (
@@ -35,7 +40,7 @@ function MenuUserDropDown({ title }: IProps) {
             {menuItems.current.map((item, index) => (
               <Menu.Item key={item.href + index}>
                 {({ active }) => (
-                  <DropDownLink active={active} href={item.href}>
+                  <DropDownLink active={active} item={item}>
                     {item.title}
                   </DropDownLink>
                 )}

@@ -1,13 +1,21 @@
 import React from "react";
 import Link from "next/link";
-interface IProps {
+
+interface IItem {
+  title?: string;
   href: string;
-  children: any;
+  clickHandle?: any;
+}
+interface IProps {
+  item: IItem;
   active: boolean;
+  children: any;
 }
 
 const DropDownLink = (props: IProps, ref: any) => {
-  const { href, children, active, ...rest } = props;
+  const { item, children, active, ...rest } = props;
+
+  const { href, clickHandle } = item;
   return (
     <Link
       {...ref}
@@ -16,6 +24,7 @@ const DropDownLink = (props: IProps, ref: any) => {
         active ? "bg-black text-white" : "text-gray-900"
       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
       href={href}
+      onClick={clickHandle ? clickHandle : undefined}
     >
       {children}
     </Link>
