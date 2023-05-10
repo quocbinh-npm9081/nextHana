@@ -10,6 +10,7 @@ import { SignInResponse, signIn, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { BsFacebook } from "react-icons/bs";
+
 const Login = () => {
   const { data: session } = useSession();
   const router = useRouter();
