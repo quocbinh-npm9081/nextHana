@@ -6,7 +6,12 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SignInResponse, signIn, useSession } from "next-auth/react";
+import {
+  SignInResponse,
+  getSession,
+  signIn,
+  useSession,
+} from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { BsFacebook } from "react-icons/bs";
@@ -14,8 +19,8 @@ import { BsFacebook } from "react-icons/bs";
 const Login = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const { redirect } = router.query;
-
+  const redirectURL = router.query.callbackUrl as string;
+  //const callBackURL = (router.query?.callbackUrl as string) ?? "/";
   const phoneRegExp =
     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -47,13 +52,14 @@ const Login = () => {
         redirect: false,
         phoneNumber,
         password,
+        callbackUrl: redirectURL ? redirectURL : "/",
       });
-      const signInErrorInfo: SignInResponse | undefined = result;
-      if (signInErrorInfo?.error) {
+      const status: SignInResponse | undefined = result;
+      if (status?.error) {
         reset({
           password: "",
         });
-        toast.error(String(signInErrorInfo?.error), {
+        toast.error(String(status?.error), {
           position: "top-right",
           autoClose: 1500,
           hideProgressBar: false,
@@ -63,8 +69,7 @@ const Login = () => {
           progress: undefined,
           theme: "dark",
         });
-      }
-      console.log("result: ", result);
+      } else router.push(String(status?.url));
     } catch (err) {
       toast.error(String(err), {
         position: "top-right",
@@ -78,12 +83,14 @@ const Login = () => {
       });
     }
   };
-  useEffect(() => {
-    if (session?.user) {
-      if (redirect) router.push(String(redirect));
-      else router.push("/");
-    }
-  }, [router, session]);
+
+  //useEffect(() => {
+  //   if (session?.user) {
+  //     if (redirect) router.push(String(redirect));
+  //     else router.push("/");
+  //   }
+  // }, [router, session]);
+  console.log("router.query: ", router.query.callbackUrl);
 
   return (
     <Layout title="Login">
@@ -196,7 +203,11 @@ const Login = () => {
               <BsFacebook
                 size={40}
                 color="#039BE5"
-                onClick={() => signIn("facebook")}
+                onClick={() =>
+                  signIn("facebook", {
+                    callbackUrl: redirectURL ? redirectURL : "/",
+                  })
+                }
               />
             </div>
           </div>

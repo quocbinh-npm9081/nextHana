@@ -415,7 +415,7 @@ const Cart = () => {
                 <button
                   disabled={selectedItems.length === 0 ? true : false}
                   // Always do navigations after the first render
-                  onClick={() => router.push("login?redirect=/user/shipping")}
+                  onClick={() => router.push("/user/shipping")}
                   className=" font-semibold  py-3 text-sm text-white uppercase w-full primary-button"
                 >
                   Checkout

@@ -15,7 +15,7 @@ function MenuUserDropDown({ title }: IProps) {
     {
       title: "Đăng xuất",
       href: "#",
-      clickHandle: () => signOut({ callbackUrl: "/user/login" }),
+      clickHandle: () => signOut({ callbackUrl: "/" }),
     },
   ]);
 

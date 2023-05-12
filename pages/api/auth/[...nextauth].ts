@@ -5,11 +5,15 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import db from "@/utils/db";
 import UserModel from "@/models/User";
 import bcrypt from "bcryptjs";
-export default NextAuth({
+import type { NextAuthOptions } from "next-auth";
+
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
-    // maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60, // the session will last 30 days
   },
+  secret: process.env.NEXTAUTH_SECRET,
+
   providers: [
     FacebookProvider({
       clientId: String(process.env.FACEBOOK_CLIENT_ID),
@@ -56,4 +60,8 @@ export default NextAuth({
       return session;
     },
   },
-});
+  pages: {
+    signIn: "/user/login",
+  },
+};
+export default NextAuth(authOptions);
