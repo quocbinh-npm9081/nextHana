@@ -14,6 +14,8 @@ import { IInfoProduct } from "@/utils/types";
 import { toast } from "react-toastify";
 import Dialog from "@/components/Dialog";
 import dynamic from "next/dynamic";
+import EmptyCart from "@/components/EmptyCart";
+import BreakCrumb from "@/components/BreakCrumb";
 const Cart = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
@@ -189,12 +191,10 @@ const Cart = () => {
   }, [cartItems]);
 
   useEffect(() => {
-    console.log("selectedItems: ", selectedItems);
-
     setTotalPrice(totalCost);
   }, [selectedItems]);
   return (
-    <Layout title="Your cart">
+    <Layout title="Giỏ hàng">
       {showModal ? (
         <Dialog
           slug={slug}
@@ -204,10 +204,10 @@ const Cart = () => {
           title="Thông báo"
         />
       ) : null}
-
-      <div className=" bg-slate-100">Shopping cart</div>
       {cartItems.length == 0 ? (
-        <div>Cart Empty</div>
+        <div className="flex items-center justify-center h-screen  place-content-center">
+          <EmptyCart />
+        </div>
       ) : (
         <div className="flex flex-col">
           <div className="overflow-x-auto flex sm:-mx-6 lg:-mx-8">

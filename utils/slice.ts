@@ -2,6 +2,8 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { IInfoProduct } from "./types";
 import Cookies from "js-cookie";
+
+//STATES
 const initialCartState: any = {
   //cart: { cartItems: [] },
   //parse Json to Obbject
@@ -9,9 +11,22 @@ const initialCartState: any = {
     ? { ...JSON.parse(String(Cookies.get("cart"))).cart }
     : { cartItems: [] },
 };
+const initialShippingState: any = {
+  userInfo: {
+    name: "",
+    phoneNumber: "",
+    address: "",
+    province: "",
+    district: "",
+    ward: "",
+  },
+};
 
-// selectors
+// SELECTORS
 export const selectCart = (state: RootState) => state.cartReducer;
+export const selectShipping = (state: RootState) => state.shippingReducer;
+
+//SLIDES
 export const cartSlice = createSlice({
   name: "cartSlice",
   initialState: initialCartState,
@@ -78,8 +93,21 @@ export const cartSlice = createSlice({
     },
   },
 });
-// actions
+export const shippingSlice = createSlice({
+  name: "shippingSlice",
+  initialState: initialShippingState,
+  reducers: {
+    saveUserInfor: (state, action: PayloadAction<any>) => {
+      return action.payload;
+    },
+  },
+});
+
+// ACTIONS
 export const { addProductToCart, removeProductInCart, updateYourSize } =
   cartSlice.actions;
+export const { saveUserInfor } = shippingSlice.actions;
 
+//REDUCERS
 export const cartReducer = cartSlice.reducer;
+export const shippingReducer = shippingSlice.reducer;
