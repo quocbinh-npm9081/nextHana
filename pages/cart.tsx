@@ -204,6 +204,10 @@ const Cart = () => {
           title="Thông báo"
         />
       ) : null}
+      <BreakCrumb
+        image="/static/images/breakcrumbs/breadcrumb-bg-1.png"
+        title="Giỏ hàng"
+      ></BreakCrumb>
       {cartItems.length == 0 ? (
         <div className="flex items-center justify-center h-screen  place-content-center">
           <EmptyCart />

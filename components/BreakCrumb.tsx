@@ -12,7 +12,7 @@ const BreakCrumb = ({ image, title }: IProps) => {
   return (
     <div className="flex flex-col relative justify-center items-start">
       <img src={image} alt={image} />
-      <div className="flex flex-col absolute">
+      <div className="flex flex-col absolute px-5">
         <h1 className="breakcrumb_title">{title}</h1>
 
         <ul className="breakcrumb_list">
@@ -24,7 +24,7 @@ const BreakCrumb = ({ image, title }: IProps) => {
           {paths.map((path, index) => {
             const linkPath = `/${paths.slice(0, index + 1).join("/")}`;
             return (
-              <li key={linkPath + index}>
+              <li key={linkPath + index} className="capitalize">
                 {" / "}
                 <Link href={linkPath} legacyBehavior>
                   {path}
