@@ -1,30 +1,20 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { IInfoProduct } from "./types";
 import Cookies from "js-cookie";
 
 //STATES
 const initialCartState: any = {
-  //cart: { cartItems: [] },
+  // cart: { cartItems: [] },
   //parse Json to Obbject
   cart: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).cart }
     : { cartItems: [] },
-};
-const initialShippingState: any = {
-  userInfo: {
-    name: "",
-    phoneNumber: "",
-    address: "",
-    province: "",
-    district: "",
-    ward: "",
-  },
+  shippingWards: {},
 };
 
 // SELECTORS
 export const selectCart = (state: RootState) => state.cartReducer;
-export const selectShipping = (state: RootState) => state.shippingReducer;
 
 //SLIDES
 export const cartSlice = createSlice({
@@ -91,23 +81,28 @@ export const cartSlice = createSlice({
       Cookies.set("cart", JSON.stringify({ ...state }));
       return state;
     },
-  },
-});
-export const shippingSlice = createSlice({
-  name: "shippingSlice",
-  initialState: initialShippingState,
-  reducers: {
-    saveUserInfor: (state, action: PayloadAction<any>) => {
-      return action.payload;
+    saveUserInfor(state, action: PayloadAction<any>) {
+      console.log("state: ", { ...action.payload });
+      const infoDelive = action.payload;
+      return {
+        ...state,
+        shippingWards: {
+          userInfo: {
+            ...infoDelive,
+          },
+        },
+      };
     },
   },
 });
 
 // ACTIONS
-export const { addProductToCart, removeProductInCart, updateYourSize } =
-  cartSlice.actions;
-export const { saveUserInfor } = shippingSlice.actions;
+export const {
+  addProductToCart,
+  removeProductInCart,
+  updateYourSize,
+  saveUserInfor,
+} = cartSlice.actions;
 
 //REDUCERS
 export const cartReducer = cartSlice.reducer;
-export const shippingReducer = shippingSlice.reducer;

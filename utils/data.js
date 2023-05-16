@@ -89,22 +89,22 @@ const data = {
   ],
   categories: [
     {
-      name: "Ao",
+      name: "Áo",
       slug: "ao",
       image: "/static/images/products/pants1.jpg",
     },
     {
-      name: "Quan",
+      name: "Quần",
       slug: "quan",
       image: "/static/images/products/pants2.jpg",
     },
     {
-      name: "My pham",
+      name: "Mỹ phẩm",
       slug: "my-pham",
       image: "/static/images/products/shirt2.jpg",
     },
     {
-      name: "Cham soc suc khoe",
+      name: "Chăm sóc sức khỏe",
       slug: "cham-socsuc-khoe",
       image: "/static/images/products/shirt1.jpg",
     },

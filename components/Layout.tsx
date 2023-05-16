@@ -16,8 +16,8 @@ interface IProps {
 export default function Layout({ title, children }: IProps) {
   const { asPath } = useRouter();
   const { data: session, status } = useSession();
-  console.log("status: ", status);
-  console.log("data: ", session);
+  // console.log("status: ", status);
+  // console.log("data: ", session);
 
   return (
     <>

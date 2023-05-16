@@ -12,11 +12,12 @@ const CategoryItem = ({ category }: any) => {
             alt={category.name}
             className="rounded-sm shadow"
           />
-          <div className="absolute left-10  top-14">
+          <div className="absolute left-10  top-14 text-lg">
             <h2>{category.name}</h2>
           </div>
-          <div className="absolute left-10 bottom-10">
-            <h3 className="underline">Xem ngay</h3>
+
+          <div className="absolute  left-10 bottom-14 inline-flex text- justify-center items-center rounded-md bg-black  px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+            <h3 className="no-underline">Xem ngay</h3>
           </div>
         </a>
       </Link>
