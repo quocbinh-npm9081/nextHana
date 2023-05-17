@@ -8,7 +8,6 @@ import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import { log } from "console";
 
 interface IProps {
   setSelectedIndex: (index: number) => void;
@@ -23,9 +22,8 @@ interface IProvince {
   phone_code: number;
 }
 const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
-  const { shippingWards } = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
-
+  const { shippingWards } = useAppSelector(selectCart);
   const [provinces, setProvinces] = useState<IProvince[]>([]);
   const [districts, setDistricts] = useState<any[]>([]);
   const [wards, setWards] = useState<any[]>([]);
@@ -106,8 +104,7 @@ const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
     .filter((err: any) => err != undefined);
 
   const onSubmit = (data: any) => {
-    // setSelectedIndex(1);
-
+    setSelectedIndex(1);
     try {
       dispatch(
         saveUserInfor({

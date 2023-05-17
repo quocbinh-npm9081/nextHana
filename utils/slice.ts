@@ -10,7 +10,9 @@ const initialCartState: any = {
   cart: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).cart }
     : { cartItems: [] },
-  shippingWards: {},
+  shippingWards: Cookies.get("cart")
+    ? { ...JSON.parse(String(Cookies.get("cart"))).shippingWards }
+    : {},
 };
 
 // SELECTORS
@@ -60,7 +62,6 @@ export const cartSlice = createSlice({
       );
       if (itemIndex != -1) {
         state.cart.cartItems.splice(itemIndex, 1);
-
         //add cookie for save cart item
         Cookies.set("cart", JSON.stringify({ ...state }));
         return state;
@@ -82,8 +83,19 @@ export const cartSlice = createSlice({
       return state;
     },
     saveUserInfor(state, action: PayloadAction<any>) {
-      console.log("state: ", { ...action.payload });
       const infoDelive = action.payload;
+      //add cookie for save shippingWards
+      Cookies.set(
+        "cart",
+        JSON.stringify({
+          ...state,
+          shippingWards: {
+            userInfo: {
+              ...infoDelive,
+            },
+          },
+        })
+      );
       return {
         ...state,
         shippingWards: {

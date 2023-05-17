@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import EmptyCart from "@/components/EmptyCart";
 
 import InfoDelive from "@/components/ShippingWard/InfoDelive";
+import Payment from "@/components/ShippingWard/Payment";
 
 const Shipping = () => {
   const { data: session, status } = useSession();
@@ -71,7 +72,9 @@ const Shipping = () => {
                   setSelectedIndex={setSelectedIndex}
                 />
               </Tab.Panel>
-              <Tab.Panel>Content 2</Tab.Panel>
+              <Tab.Panel>
+                <Payment />
+              </Tab.Panel>
               <Tab.Panel>Content 3</Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
