@@ -4,7 +4,6 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { saveUserInfor, selectCart } from "@/utils/slice";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
-import { useSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
@@ -428,7 +427,7 @@ const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
                   <div className="md:col-span-5 text-right">
                     <div className="inline-flex items-end">
                       <button className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded">
-                        Tiếp
+                        Tiếp tục
                       </button>
                     </div>
                   </div>

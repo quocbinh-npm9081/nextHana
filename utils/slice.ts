@@ -13,6 +13,7 @@ const initialCartState: any = {
   shippingWards: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).shippingWards }
     : {},
+  paymentMethod: "",
 };
 
 // SELECTORS
@@ -105,6 +106,10 @@ export const cartSlice = createSlice({
         },
       };
     },
+    saveaPaymentMethod(state, action: PayloadAction<any>) {
+      console.log(action);
+      return state;
+    },
   },
 });
 
@@ -114,6 +119,7 @@ export const {
   removeProductInCart,
   updateYourSize,
   saveUserInfor,
+  saveaPaymentMethod,
 } = cartSlice.actions;
 
 //REDUCERS

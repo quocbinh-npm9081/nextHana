@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import CardScreen from "./CardScreen";
 import { useRouter } from "next/router";
-import { signIn, useSession } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Loading from "./Loading";
 
 import MenuUserDropDown from "./MenuUserDropDown";
@@ -55,13 +55,10 @@ export default function Layout({ title, children }: IProps) {
         >
           {children}
         </main>
-        {asPath == "/user/login" ? (
-          ""
-        ) : (
-          <footer className="justify-center items-center flex h-10 shadow-inner">
-            Footer
-          </footer>
-        )}
+
+        <footer className="justify-center items-center flex h-10 shadow-inner">
+          Footer
+        </footer>
       </div>
     </>
   );
