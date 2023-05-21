@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
-import { saveaPaymentMethod } from "@/utils/slice";
-import { useAppDispatch } from "@/utils/hooks";
+import { savePaymentMethod } from "@/utils/slice";
+import { useAppDispatch, useAppSelector } from "@/utils/hooks";
+import { selectCart } from "@/utils/slice";
 interface IPlan {
   id: string;
   name: string;
@@ -15,11 +16,13 @@ interface IProps {
 
 function ButtonGroup({ plans }: IProps) {
   const methods = useFormContext();
+  const { shippingWards } = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
   const onSubmit = (data: any) => {
-    dispatch(saveaPaymentMethod(data));
+    dispatch(savePaymentMethod(data));
   };
-  console.log(methods.formState.errors);
+  // console.log(methods.formState.errors);
+  console.log("shippingWards: ", shippingWards);
 
   return (
     <div className="w-full px-4 py-16">

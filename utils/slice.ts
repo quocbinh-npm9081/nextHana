@@ -5,15 +5,16 @@ import Cookies from "js-cookie";
 
 //STATES
 const initialCartState: any = {
-  // cart: { cartItems: [] },
   //parse Json to Obbject
   cart: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).cart }
     : { cartItems: [] },
   shippingWards: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).shippingWards }
-    : {},
-  paymentMethod: "",
+    : {
+        userInfo: {},
+        paymentMethod: "",
+      },
 };
 
 // SELECTORS
@@ -85,12 +86,15 @@ export const cartSlice = createSlice({
     },
     saveUserInfor(state, action: PayloadAction<any>) {
       const infoDelive = action.payload;
+      const { shippingWards } = state;
+
       //add cookie for save shippingWards
       Cookies.set(
         "cart",
         JSON.stringify({
           ...state,
           shippingWards: {
+            ...shippingWards,
             userInfo: {
               ...infoDelive,
             },
@@ -100,15 +104,34 @@ export const cartSlice = createSlice({
       return {
         ...state,
         shippingWards: {
+          ...shippingWards,
           userInfo: {
             ...infoDelive,
           },
         },
       };
     },
-    saveaPaymentMethod(state, action: PayloadAction<any>) {
-      console.log(action);
-      return state;
+    savePaymentMethod(state, action: PayloadAction<any>) {
+      const paymentMethod: string = action.payload;
+      const { shippingWards } = state;
+
+      Cookies.set(
+        "cart",
+        JSON.stringify({
+          ...state,
+          shippingWards: {
+            ...shippingWards,
+            paymentMethod: paymentMethod,
+          },
+        })
+      );
+      return {
+        ...state,
+        shippingWards: {
+          ...shippingWards,
+          paymentMethod: paymentMethod,
+        },
+      };
     },
   },
 });
@@ -119,7 +142,7 @@ export const {
   removeProductInCart,
   updateYourSize,
   saveUserInfor,
-  saveaPaymentMethod,
+  savePaymentMethod,
 } = cartSlice.actions;
 
 //REDUCERS

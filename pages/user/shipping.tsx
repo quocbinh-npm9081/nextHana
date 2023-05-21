@@ -1,28 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import Layout from "@/components/Layout";
-
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useSession } from "next-auth/react";
-import axios from "axios";
 import dynamic from "next/dynamic";
 import { selectCart } from "@/utils/slice";
-import { useAppDispatch, useAppSelector } from "@/utils/hooks";
-import { useRouter } from "next/router";
+import { useAppSelector } from "@/utils/hooks";
 import EmptyCart from "@/components/EmptyCart";
 
 import InfoDelive from "@/components/ShippingWard/InfoDelive";
 import Payment from "@/components/ShippingWard/Payment";
 
 const Shipping = () => {
-  const { data: session, status } = useSession();
-  const dispatch = useAppDispatch();
   const { cart } = useAppSelector(selectCart);
-  const router = useRouter();
+  const state1 = useAppSelector(selectCart);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-
+  const [disabledIndex, setDisableIndex] = useState<number>(0);
   let [categories] = useState([
     "Thông tin vận chuyển",
     "Phương thức thanh toán",
@@ -32,6 +23,16 @@ const Shipping = () => {
   const classNames = (...classes: any) => {
     return classes.filter(Boolean).join(" ");
   };
+
+  useEffect(() => {
+    // if(selectedIndex === 1){
+    //   const InfoDelive = cart.
+    // }
+    // if(selectedIndex === 2){
+
+    // }
+    console.log("state: ", state1);
+  });
 
   return (
     <Layout title="Thông tin đặt hàng">
