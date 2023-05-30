@@ -1,7 +1,7 @@
 import React from "react";
 interface IProps {
   slug: string | undefined;
-  accept: (agm: string) => void;
+  accept: (slug: string) => void;
   setShowModal: (bool: boolean) => void;
   content: string;
   title: string;

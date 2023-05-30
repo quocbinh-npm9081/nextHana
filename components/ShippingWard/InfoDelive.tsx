@@ -16,6 +16,15 @@ interface IProvince {
   codename: string;
   phone_code: number;
 }
+interface ISelecteValueError {
+  message: string;
+  ref: undefined;
+  type: string;
+}
+
+interface ISelectedBoxError {
+  value: ISelecteValueError;
+}
 const InfoDelive = () => {
   const dispatch = useAppDispatch();
   const { loading, shippingWards } = useAppSelector(selectCart);
@@ -88,16 +97,15 @@ const InfoDelive = () => {
     })
     .filter((err: any) => err != undefined);
   const errorsMessageSelecteBox = Object.keys(errors)
-    .map((key: string) => {
-      if (
+    .filter(
+      (key) =>
         key === "hana_proviincee" ||
         key === "hana_district" ||
         key === "hana_ward"
-      ) {
-        return errors[key as keyof typeof errors];
-      }
-    })
-    .filter((err: any) => err != undefined);
+    )
+    .map(
+      (key) => errors[key as keyof typeof errors]
+    ) as unknown as ISelectedBoxError[];
 
   const onSubmit = (data: any) => {
     const dataAction = {
@@ -185,6 +193,7 @@ const InfoDelive = () => {
         });
     }
   }, [hana_district, hana_proviincee]);
+  console.log("errorsMessageSelecteBox: ", errorsMessageSelecteBox);
 
   return (
     <div className=" p-6 bg-gray-100 flex items-start justify-center">
@@ -268,7 +277,7 @@ const InfoDelive = () => {
                       ></path>
                     </svg>
                     <span className="sr-only">Info</span>
-                    <div>{String(msg?.value.message)}</div>
+                    <div>{msg?.value.message}</div>
                   </div>
                 ))}
               </div>

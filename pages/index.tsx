@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Layout from "@/components/Layout";
 import Grid from "@/components/Grid";
 import CarouselBanner from "@/components/CarouselBanner";

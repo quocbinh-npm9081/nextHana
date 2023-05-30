@@ -6,11 +6,12 @@ const CategoryItem = ({ category }: any) => {
   return (
     <div className="card-category">
       <Link href={`/category/${category.slug}`} legacyBehavior>
-        <a className="flex flex-col items-center justify-start h-48 overflow-hidden relative p-2">
-          <img
+        <a className="flex flex-col items-center justify-start h-52 overflow-hidden relative p-2">
+          <Image
+            fill={true}
             src={category.image}
             alt={category.name}
-            className="rounded-sm shadow"
+            className="rounded-sm shadow w-full h-full"
           />
           <div className="absolute left-10  top-14 text-lg">
             <h2>{category.name}</h2>

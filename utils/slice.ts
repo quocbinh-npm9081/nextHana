@@ -185,10 +185,10 @@ export const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(saveInfoAndChangeTabShipping.pending, (state, action) => {
+      .addCase(saveInfoAndChangeTabShipping.pending, (state) => {
         state.loading = true;
       })
-      .addCase(saveInfoAndChangeTabShipping.fulfilled, (state, action) => {
+      .addCase(saveInfoAndChangeTabShipping.fulfilled, (state) => {
         state.loading = false;
       });
   },

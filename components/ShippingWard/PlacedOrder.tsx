@@ -52,11 +52,12 @@ const PlacedOder = () => {
                 {cartItems.map((product: any, index: number) => (
                   <li key={index} className="flex py-6 space-x-6">
                     <Image
+                      placeholder="blur"
                       width={24}
                       height={24}
                       src={product.item.images[0]}
                       alt={product.item.images[0]}
-                      className="flex-none w-24 h-24 bg-gray-100 rounded-md object-center object-cover"
+                      className="flex-none h-24 w-24 bg-gray-100 rounded-md object-center object-cover"
                     />
                     <div className="flex-auto space-y-1">
                       <h3 className="text-gray-900">

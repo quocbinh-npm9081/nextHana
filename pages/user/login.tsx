@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Layout from "@/components/Layout";
 import data from "@/utils/data";
 import dynamic from "next/dynamic";
@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { SignInResponse, signIn, useSession } from "next-auth/react";
+import { SignInResponse, signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { BsFacebook } from "react-icons/bs";
