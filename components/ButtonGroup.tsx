@@ -13,7 +13,7 @@ interface IPlan {
 }
 
 interface IProps {
-  setSelectedIndex: (e: number) => any;
+  setSelectedIndex: () => any;
   plans: React.MutableRefObject<IPlan[]>;
 }
 
@@ -30,7 +30,9 @@ function ButtonGroup({ plans }: IProps) {
     };
     try {
       dispatch(saveInfoAndChangeTabShipping(dataAction));
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const routerBack = () => dispatch(changeTabGroupShipping(0));

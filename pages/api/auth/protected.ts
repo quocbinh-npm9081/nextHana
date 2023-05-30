@@ -1,4 +1,3 @@
-import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "./[...nextauth]";
 import { getServerSession } from "next-auth";
 export default async function handler(req: any, res: any) {

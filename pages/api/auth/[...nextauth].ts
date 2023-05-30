@@ -22,7 +22,7 @@ export const authOptions: NextAuthOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         const { phoneNumber, password } = credentials as {
           phoneNumber: string;
           password: string;

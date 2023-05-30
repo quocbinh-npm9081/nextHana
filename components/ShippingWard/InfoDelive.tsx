@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import {
-  saveUserInfor,
-  selectCart,
-  saveInfoAndChangeTabShipping,
-} from "@/utils/slice";
+import { selectCart, saveInfoAndChangeTabShipping } from "@/utils/slice";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import dynamic from "next/dynamic";
 import Select from "react-select";
@@ -81,7 +77,7 @@ const InfoDelive = () => {
   });
   const { hana_proviincee, hana_district } = watch();
   const errorsMessageInputText = Object.keys(errors)
-    .map((key: string, index: number) => {
+    .map((key: string) => {
       if (
         key === "hana_name" ||
         key === "hana_phoneNumber" ||
@@ -92,7 +88,7 @@ const InfoDelive = () => {
     })
     .filter((err: any) => err != undefined);
   const errorsMessageSelecteBox = Object.keys(errors)
-    .map((key: string, index: number) => {
+    .map((key: string) => {
       if (
         key === "hana_proviincee" ||
         key === "hana_district" ||
@@ -188,7 +184,7 @@ const InfoDelive = () => {
           // always executed
         });
     }
-  }, [hana_district]);
+  }, [hana_district, hana_proviincee]);
 
   return (
     <div className=" p-6 bg-gray-100 flex items-start justify-center">

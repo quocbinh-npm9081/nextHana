@@ -1,24 +1,10 @@
 import { useAppSelector } from "@/utils/hooks";
 import { selectCart } from "@/utils/slice";
-
+import Image from "next/image";
 const PlacedOder = () => {
-  const products = [
-    {
-      id: 1,
-      name: "Basic Tee",
-      href: "#",
-      price: "$36.00",
-      color: "Charcoal",
-      size: "L",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/confirmation-page-06-product-01.jpg",
-      imageAlt: "Model wearing men's charcoal basic tee in large.",
-    },
-    // More products...
-  ];
   const { cart, shippingWards } = useAppSelector(selectCart);
   const { cartItems } = cart;
-  const { userInfo } = shippingWards;
+  // const { userInfo } = shippingWards;
   console.log({ cart, shippingWards });
   return (
     <>
@@ -32,9 +18,10 @@ const PlacedOder = () => {
       */}
       <main className="relative lg:min-h-full">
         <div className="h-80 overflow-hidden lg:absolute lg:w-1/2 lg:h-full lg:pr-4 xl:pr-12">
-          <img
+          <Image
+            fill
             src="https://tailwindui.com/img/ecommerce-images/confirmation-page-06-hero.jpg"
-            alt="TODO"
+            alt="image"
             className="h-full w-full object-center object-cover"
           />
         </div>
@@ -64,7 +51,9 @@ const PlacedOder = () => {
               >
                 {cartItems.map((product: any, index: number) => (
                   <li key={index} className="flex py-6 space-x-6">
-                    <img
+                    <Image
+                      width={24}
+                      height={24}
                       src={product.item.images[0]}
                       alt={product.item.images[0]}
                       className="flex-none w-24 h-24 bg-gray-100 rounded-md object-center object-cover"
