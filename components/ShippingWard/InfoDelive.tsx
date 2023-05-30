@@ -439,8 +439,8 @@ const InfoDelive = () => {
               </form>
               <div className="absolute bottom-0 inline-flex items-end">
                 <button
-                  onClick={() => router.back()}
                   className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded"
+                  onClick={() => router.back()}
                 >
                   Trở lại
                 </button>

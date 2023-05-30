@@ -10,6 +10,8 @@ interface IPlan {
 }
 
 interface IProps {
+  setSelectedIndex: (e: number) => any;
+
   plans: React.MutableRefObject<IPlan[]>;
 }
 

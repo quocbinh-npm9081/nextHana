@@ -27,9 +27,10 @@ const Shipping = () => {
   const changeTab = (e: number) => {
     if (e <= indexActive) setSelectedIndex(e);
   };
+
   useEffect(() => {
     setSelectedIndex(indexActive);
-  }, [indexActive]);
+  }, [indexActive, shippingWards]);
 
   return (
     <Layout title="Thông tin đặt hàng">
@@ -67,7 +68,7 @@ const Shipping = () => {
                 <InfoDelive />
               </Tab.Panel>
               <Tab.Panel>
-                <Payment />
+                <Payment setSelectedIndex={setSelectedIndex} />
               </Tab.Panel>
               <Tab.Panel>Content 3</Tab.Panel>
             </Tab.Panels>

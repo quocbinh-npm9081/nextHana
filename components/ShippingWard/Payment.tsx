@@ -2,8 +2,10 @@ import React, { useRef } from "react";
 import ButtonGroup from "../ButtonGroup";
 import FormProviderWrapper from "../Form/FormProviderWrapper";
 import * as yup from "yup";
-
-const Payment = () => {
+interface IProps {
+  setSelectedIndex: (e: number) => any;
+}
+const Payment = ({ setSelectedIndex }: IProps) => {
   const plans = useRef([
     {
       id: "thanhtoankhinhanhang",
@@ -39,7 +41,10 @@ const Payment = () => {
                 defaultValues={defaultValues}
                 validation={shemaRadioGroup}
               >
-                <ButtonGroup plans={plans} />
+                <ButtonGroup
+                  setSelectedIndex={setSelectedIndex}
+                  plans={plans}
+                />
               </FormProviderWrapper>
             </div>
           </div>
