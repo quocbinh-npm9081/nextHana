@@ -15,7 +15,7 @@ const initialCartState: any = {
   //parse Json to Obbject
   cart: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).cart }
-    : { cartItems: [] },
+    : { cartItems: [], totalPrice: 0 },
   shippingWards: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).shippingWards }
     : {

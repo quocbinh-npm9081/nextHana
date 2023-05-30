@@ -330,7 +330,7 @@ const Cart = () => {
                                 <span className="uppercase text-gray-300 ">
                                   <select
                                     defaultValue={product.yourSize}
-                                    className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg p-2.5 uppercase"
+                                    className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg p-2.5 capitalize"
                                     onChange={(
                                       e: React.ChangeEvent<HTMLSelectElement>
                                     ) =>
@@ -351,10 +351,10 @@ const Cart = () => {
                             )}
                             {product.item.colors.length > 0 && (
                               <>
-                                <span className="uppercase text-gray-300 ">
+                                <span className="uppercase mt-2 text-gray-300 ">
                                   <select
                                     defaultValue={product.yourColor}
-                                    className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg p-2.5 uppercase"
+                                    className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg p-2.5 capitalize"
                                     onChange={(
                                       e: React.ChangeEvent<HTMLSelectElement>
                                     ) =>
