@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
-import { savePaymentMethod } from "@/utils/slice";
+import { saveInfoAndChangeTabShipping } from "@/utils/slice";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import { selectCart } from "@/utils/slice";
 interface IPlan {
@@ -19,9 +19,17 @@ function ButtonGroup({ plans }: IProps) {
   const { shippingWards } = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
   const onSubmit = (data: any) => {
-    dispatch(savePaymentMethod(data));
+    const dataAction = {
+      type: "SAVE_PAYMENT_METHOD",
+      data: {
+        method: data,
+        index: 2,
+      },
+    };
+    try {
+      dispatch(saveInfoAndChangeTabShipping(dataAction));
+    } catch (error) {}
   };
-  // console.log(methods.formState.errors);
   console.log("shippingWards: ", shippingWards);
 
   return (
@@ -55,14 +63,22 @@ function ButtonGroup({ plans }: IProps) {
               </label>
             ))}
           </div>
-          <div className="md:col-span-5 text-right absolute right-0 bottom-0">
+          <div className="md:col-span-5 text-right absolute    right-0 bottom-0">
             <div className="inline-flex items-end">
-              <button className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded">
+              <button
+                type="submit"
+                className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded"
+              >
                 Tiếp tục
               </button>
             </div>
           </div>{" "}
         </form>
+        <div className="inline-flex items-end absolute left-0 bottom-0">
+          <button className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded">
+            Trở lại
+          </button>
+        </div>
       </div>
     </div>
   );

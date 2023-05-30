@@ -1,10 +1,17 @@
-import { createSlice, PayloadAction, current } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  PayloadAction,
+  createAsyncThunk,
+  current,
+} from "@reduxjs/toolkit";
 import { RootState } from "./store";
 import { IInfoProduct } from "./types";
 import Cookies from "js-cookie";
 
 //STATES
 const initialCartState: any = {
+  loading: false,
+
   //parse Json to Obbject
   cart: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).cart }
@@ -12,11 +19,15 @@ const initialCartState: any = {
   shippingWards: Cookies.get("cart")
     ? { ...JSON.parse(String(Cookies.get("cart"))).shippingWards }
     : {
+        tabActive: 0,
         userInfo: {},
         paymentMethod: "",
       },
 };
-
+interface IPayloadMutilple {
+  type: string;
+  data: any;
+}
 // SELECTORS
 export const selectCart = (state: RootState) => state.cartReducer;
 
@@ -112,7 +123,7 @@ export const cartSlice = createSlice({
       };
     },
     savePaymentMethod(state, action: PayloadAction<any>) {
-      const paymentMethod: string = action.payload;
+      const paymentMethod: string = action.payload.method;
       const { shippingWards } = state;
 
       Cookies.set(
@@ -133,8 +144,68 @@ export const cartSlice = createSlice({
         },
       };
     },
+    changeTabGroupShipping(state, action: PayloadAction<any>) {
+      const tabActive: number = action.payload;
+      const { shippingWards } = state;
+
+      Cookies.set(
+        "cart",
+        JSON.stringify({
+          ...state,
+          shippingWards: {
+            ...shippingWards,
+            tabActive: tabActive,
+          },
+        })
+      );
+      return {
+        ...state,
+        shippingWards: {
+          ...shippingWards,
+          tabActive: tabActive,
+        },
+      };
+    },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(saveInfoAndChangeTabShipping.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(saveInfoAndChangeTabShipping.fulfilled, (state, action) => {
+        state.loading = false;
+      });
   },
 });
+
+//MUlTIPLE ACTION
+//save info and change tab shipping
+export const saveInfoAndChangeTabShipping = createAsyncThunk(
+  "users/fetchByIdStatus",
+  async (payload: IPayloadMutilple, { dispatch }) => {
+    switch (payload.type) {
+      case "SAVE_USER_INFO":
+        dispatch(
+          saveUserInfor({
+            name: payload.data.user.hana_name,
+            phoneNumber: payload.data.user.hana_phoneNumber,
+            address: payload.data.user.hana_address,
+            province: payload.data.user.hana_proviincee,
+            district: payload.data.user.hana_district,
+            ward: payload.data.user.hana_ward,
+          })
+        );
+        dispatch(changeTabGroupShipping(payload.data.index));
+        break;
+      case "SAVE_PAYMENT_METHOD":
+        dispatch(savePaymentMethod(payload));
+        dispatch(changeTabGroupShipping(payload.data.index));
+        break;
+      default:
+        break;
+    }
+  }
+);
 
 // ACTIONS
 export const {
@@ -143,6 +214,7 @@ export const {
   updateYourSize,
   saveUserInfor,
   savePaymentMethod,
+  changeTabGroupShipping,
 } = cartSlice.actions;
 
 //REDUCERS

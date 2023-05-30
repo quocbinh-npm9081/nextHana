@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Tab } from "@headlessui/react";
 import Layout from "@/components/Layout";
 import dynamic from "next/dynamic";
@@ -10,10 +10,10 @@ import InfoDelive from "@/components/ShippingWard/InfoDelive";
 import Payment from "@/components/ShippingWard/Payment";
 
 const Shipping = () => {
-  const { cart } = useAppSelector(selectCart);
-  const state1 = useAppSelector(selectCart);
+  const { cart, shippingWards } = useAppSelector(selectCart);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
-  const [disabledIndex, setDisableIndex] = useState<number>(0);
+  const indexActive = shippingWards.tabActive;
+
   let [categories] = useState([
     "Thông tin vận chuyển",
     "Phương thức thanh toán",
@@ -24,15 +24,12 @@ const Shipping = () => {
     return classes.filter(Boolean).join(" ");
   };
 
+  const changeTab = (e: number) => {
+    if (e <= indexActive) setSelectedIndex(e);
+  };
   useEffect(() => {
-    // if(selectedIndex === 1){
-    //   const InfoDelive = cart.
-    // }
-    // if(selectedIndex === 2){
-
-    // }
-    console.log("state: ", state1);
-  });
+    setSelectedIndex(indexActive);
+  }, [indexActive]);
 
   return (
     <Layout title="Thông tin đặt hàng">
@@ -46,11 +43,10 @@ const Shipping = () => {
         </>
       ) : (
         <div className="w-full  px-2 py-16 sm:px-0">
-          <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
+          <Tab.Group selectedIndex={selectedIndex} onChange={changeTab}>
             <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
               {categories.map((category, index: number) => (
                 <Tab
-                  //disabled={selectedIndex === 2 ? true : false}
                   key={index}
                   className={({ selected }) =>
                     classNames(
@@ -68,10 +64,7 @@ const Shipping = () => {
             </Tab.List>
             <Tab.Panels className="mt-2">
               <Tab.Panel>
-                <InfoDelive
-                  selectedIndex={selectedIndex}
-                  setSelectedIndex={setSelectedIndex}
-                />
+                <InfoDelive />
               </Tab.Panel>
               <Tab.Panel>
                 <Payment />

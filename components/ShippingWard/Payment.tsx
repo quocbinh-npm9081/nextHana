@@ -16,6 +16,7 @@ const Payment = () => {
       logo: "https://developers.momo.vn/v3/vi/img/logo.svg",
     },
   ]);
+
   const shemaRadioGroup = yup.object().shape({
     hana_paymentMethod: yup
       .string()

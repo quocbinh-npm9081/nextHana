@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { saveUserInfor, selectCart } from "@/utils/slice";
+import {
+  saveUserInfor,
+  selectCart,
+  saveInfoAndChangeTabShipping,
+} from "@/utils/slice";
 import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import dynamic from "next/dynamic";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-
-interface IProps {
-  setSelectedIndex: (index: number) => void;
-  selectedIndex: number;
-}
+import FormProviderWrapper from "../Form/FormProviderWrapper";
 interface IProvince {
   code: number;
   name: string;
@@ -20,7 +20,7 @@ interface IProvince {
   codename: string;
   phone_code: number;
 }
-const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
+const InfoDelive = () => {
   const dispatch = useAppDispatch();
   const { shippingWards } = useAppSelector(selectCart);
   const [provinces, setProvinces] = useState<IProvince[]>([]);
@@ -103,18 +103,22 @@ const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
     .filter((err: any) => err != undefined);
 
   const onSubmit = (data: any) => {
-    setSelectedIndex(1);
+    const dataAction = {
+      type: "SAVE_USER_INFO",
+      data: {
+        user: {
+          hana_name: data.hana_name,
+          hana_phoneNumber: data.hana_phoneNumber,
+          hana_address: data.hana_address,
+          hana_proviincee: data.hana_proviincee,
+          hana_district: data.hana_district,
+          hana_ward: data.hana_ward,
+        },
+        index: 1,
+      },
+    };
     try {
-      dispatch(
-        saveUserInfor({
-          name: data.hana_name,
-          phoneNumber: data.hana_phoneNumber,
-          address: data.hana_address,
-          province: data.hana_proviincee,
-          district: data.hana_district,
-          ward: data.hana_ward,
-        })
-      );
+      dispatch(saveInfoAndChangeTabShipping(dataAction));
     } catch (error) {}
   };
 
@@ -193,8 +197,8 @@ const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
             Thông tin vận chuyển
           </h2>
 
-          <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-            <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+          <div className="bg-white  rounded shadow-lg p-4 px-4 md:p-8 mb-6">
+            <div className=" relative grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
               <div className="flex flex-col item-center justify-start">
                 {errorsMessageInputText.length === 0 ? (
                   <div
@@ -267,7 +271,7 @@ const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
                       ></path>
                     </svg>
                     <span className="sr-only">Info</span>
-                    <div>{String(msg?.value?.message)}</div>
+                    <div>{String(msg?.value.message)}</div>
                   </div>
                 ))}
               </div>
@@ -423,8 +427,7 @@ const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
                       />
                     </div>
                   </div>
-
-                  <div className="md:col-span-5 text-right">
+                  <div className=" md:col-span-5 text-right">
                     <div className="inline-flex items-end">
                       <button className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded">
                         Tiếp tục
@@ -433,6 +436,11 @@ const InfoDelive = ({ setSelectedIndex, selectedIndex }: IProps) => {
                   </div>
                 </div>
               </form>
+              <div className="absolute bottom-0 inline-flex items-end">
+                <button className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded">
+                  Trở lại
+                </button>
+              </div>
             </div>
           </div>
         </div>
