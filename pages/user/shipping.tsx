@@ -8,7 +8,7 @@ import EmptyCart from "@/components/EmptyCart";
 
 import InfoDelive from "@/components/ShippingWard/InfoDelive";
 import Payment from "@/components/ShippingWard/Payment";
-
+import PlacedOder from "@/components/ShippingWard/placedOrder";
 const Shipping = () => {
   const { cart, shippingWards } = useAppSelector(selectCart);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
@@ -48,12 +48,13 @@ const Shipping = () => {
             <Tab.List className="flex space-x-1 rounded-xl bg-blue-900/20 p-1">
               {categories.map((category, index: number) => (
                 <Tab
+                  disabled={indexActive < index}
                   key={index}
                   className={({ selected }) =>
                     classNames(
                       "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white bg-black",
-                      "ring-white   focus:outline-none focus:ring-2",
-                      selected || index < selectedIndex
+                      "ring-white  focus:outline-none focus:ring-2",
+                      selected || index < selectedIndex || indexActive < index
                         ? "bg-white !text-black "
                         : "text-white hover:bg-white hover:text-black"
                     )
@@ -70,7 +71,9 @@ const Shipping = () => {
               <Tab.Panel>
                 <Payment setSelectedIndex={setSelectedIndex} />
               </Tab.Panel>
-              <Tab.Panel>Content 3</Tab.Panel>
+              <Tab.Panel>
+                <PlacedOder />
+              </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
         </div>

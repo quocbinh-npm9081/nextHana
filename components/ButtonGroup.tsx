@@ -1,7 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
-import { saveInfoAndChangeTabShipping } from "@/utils/slice";
+import {
+  saveInfoAndChangeTabShipping,
+  changeTabGroupShipping,
+} from "@/utils/slice";
 import { useAppDispatch } from "@/utils/hooks";
 interface IPlan {
   id: string;
@@ -11,7 +14,6 @@ interface IPlan {
 
 interface IProps {
   setSelectedIndex: (e: number) => any;
-
   plans: React.MutableRefObject<IPlan[]>;
 }
 
@@ -30,6 +32,8 @@ function ButtonGroup({ plans }: IProps) {
       dispatch(saveInfoAndChangeTabShipping(dataAction));
     } catch (error) {}
   };
+
+  const routerBack = () => dispatch(changeTabGroupShipping(0));
 
   return (
     <div className="w-full px-4 py-16">
@@ -74,7 +78,10 @@ function ButtonGroup({ plans }: IProps) {
           </div>{" "}
         </form>
         <div className="inline-flex items-end absolute left-0 bottom-0">
-          <button className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded">
+          <button
+            onClick={() => routerBack()}
+            className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded"
+          >
             Trở lại
           </button>
         </div>

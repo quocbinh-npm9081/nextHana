@@ -22,7 +22,7 @@ interface IProvince {
 }
 const InfoDelive = () => {
   const dispatch = useAppDispatch();
-  const { shippingWards } = useAppSelector(selectCart);
+  const { loading, shippingWards } = useAppSelector(selectCart);
   const [provinces, setProvinces] = useState<IProvince[]>([]);
   const [districts, setDistricts] = useState<any[]>([]);
   const [wards, setWards] = useState<any[]>([]);
@@ -199,8 +199,8 @@ const InfoDelive = () => {
           </h2>
 
           <div className="bg-white  rounded shadow-lg p-4 px-4 md:p-8 mb-6">
-            <div className=" relative grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
-              <div className="flex flex-col item-center justify-start">
+            <div className="relative grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+              <div className="relative flex flex-col item-center justify-start">
                 {errorsMessageInputText.length === 0 ? (
                   <div
                     className="flex p-4 mb-4 text-sm text-blue-800 border border-blue-300 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400 dark:border-blue-800"
@@ -430,7 +430,10 @@ const InfoDelive = () => {
                   </div>
                   <div className=" md:col-span-5 text-right">
                     <div className="inline-flex items-end">
-                      <button className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded">
+                      <button
+                        disabled={loading ? true : false}
+                        className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded"
+                      >
                         Tiếp tục
                       </button>
                     </div>
@@ -439,6 +442,7 @@ const InfoDelive = () => {
               </form>
               <div className="absolute bottom-0 inline-flex items-end">
                 <button
+                  disabled={loading ? true : false}
                   className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded"
                   onClick={() => router.back()}
                 >
