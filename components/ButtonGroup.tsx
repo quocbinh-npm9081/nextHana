@@ -2,8 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import { saveInfoAndChangeTabShipping } from "@/utils/slice";
-import { useAppDispatch, useAppSelector } from "@/utils/hooks";
-import { selectCart } from "@/utils/slice";
+import { useAppDispatch } from "@/utils/hooks";
 interface IPlan {
   id: string;
   name: string;
@@ -16,7 +15,6 @@ interface IProps {
 
 function ButtonGroup({ plans }: IProps) {
   const methods = useFormContext();
-  const { shippingWards } = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
   const onSubmit = (data: any) => {
     const dataAction = {
@@ -30,7 +28,6 @@ function ButtonGroup({ plans }: IProps) {
       dispatch(saveInfoAndChangeTabShipping(dataAction));
     } catch (error) {}
   };
-  console.log("shippingWards: ", shippingWards);
 
   return (
     <div className="w-full px-4 py-16">

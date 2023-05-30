@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 import dynamic from "next/dynamic";
 import Select from "react-select";
 import { useForm, Controller } from "react-hook-form";
-import FormProviderWrapper from "../Form/FormProviderWrapper";
+import { useRouter } from "next/router";
 interface IProvince {
   code: number;
   name: string;
@@ -54,6 +54,7 @@ const InfoDelive = () => {
       value: yup.number().moreThan(0, "Xã phường không được bỏ trống  !"),
     }),
   });
+  const router = useRouter();
   const {
     control,
     handleSubmit,
@@ -437,7 +438,10 @@ const InfoDelive = () => {
                 </div>
               </form>
               <div className="absolute bottom-0 inline-flex items-end">
-                <button className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded">
+                <button
+                  onClick={() => router.back()}
+                  className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded"
+                >
                   Trở lại
                 </button>
               </div>
