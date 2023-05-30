@@ -53,8 +53,9 @@ export const cartSlice = createSlice({
               state.cart.cartItems[itemIndex].item.sale) /
               100) *
           state.cart.cartItems[itemIndex].quantity;
-        //update youSize
+        //update youSize and yourColor
         state.cart.cartItems[itemIndex].yourSize = action.payload.yourSize;
+        state.cart.cartItems[itemIndex].yourColor = action.payload.yourColor;
         return state;
       } else {
         const newItem = action.payload;
@@ -90,6 +91,21 @@ export const cartSlice = createSlice({
 
       if (itemIndex != -1)
         state.cart.cartItems[itemIndex].yourSize = action.payload.size;
+
+      //add cookie for save cart item
+      Cookies.set("cart", JSON.stringify({ ...state }));
+      return state;
+    },
+    updateYourColor: (
+      state,
+      action: PayloadAction<{ slug: string; color: string }>
+    ) => {
+      const itemIndex: any = state.cart.cartItems.findIndex(
+        (product: IInfoProduct) => product.item.slug == action.payload.slug
+      );
+
+      if (itemIndex != -1)
+        state.cart.cartItems[itemIndex].yourColor = action.payload.color;
 
       //add cookie for save cart item
       Cookies.set("cart", JSON.stringify({ ...state }));
@@ -212,6 +228,7 @@ export const {
   addProductToCart,
   removeProductInCart,
   updateYourSize,
+  updateYourColor,
   saveUserInfor,
   savePaymentMethod,
   changeTabGroupShipping,

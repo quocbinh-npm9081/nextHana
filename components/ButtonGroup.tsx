@@ -72,7 +72,7 @@ function ButtonGroup({ plans }: IProps) {
                 type="submit"
                 className="bg-black hover:bg-zinc-800 text-white font-bold py-2 px-4 rounded"
               >
-                Tiếp tục
+                Đặt hàng
               </button>
             </div>
           </div>{" "}

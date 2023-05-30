@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab } from "@headlessui/react";
 import Layout from "@/components/Layout";
 import dynamic from "next/dynamic";
@@ -8,7 +8,7 @@ import EmptyCart from "@/components/EmptyCart";
 
 import InfoDelive from "@/components/ShippingWard/InfoDelive";
 import Payment from "@/components/ShippingWard/Payment";
-import PlacedOder from "@/components/ShippingWard/placedOrder";
+import PlacedOder from "@/components/ShippingWard/PlacedOrder";
 const Shipping = () => {
   const { cart, shippingWards } = useAppSelector(selectCart);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);

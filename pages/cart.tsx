@@ -4,6 +4,7 @@ import {
   addProductToCart,
   removeProductInCart,
   updateYourSize,
+  updateYourColor,
   selectCart,
 } from "@/utils/slice";
 import { useRouter } from "next/router";
@@ -45,6 +46,7 @@ const Cart = () => {
             status: "ordered",
             totalPrice: undefined,
             yourSize: existItem.yourSize,
+            yourColor: existItem.yourColor,
           })
         );
         toast.success("Cập nhập sản phẩm thành công", {
@@ -71,6 +73,7 @@ const Cart = () => {
               status: "ordered",
               totalPrice: undefined,
               yourSize: existItem.yourSize,
+              yourColor: existItem.yourColor,
             })
           );
           toast.success("Cập nhập sản phẩm thành công", {
@@ -141,7 +144,37 @@ const Cart = () => {
       });
     }
   };
-
+  const changeYourColorHandle = (slug: string, color: string) => {
+    try {
+      dispatch(
+        updateYourColor({
+          slug: slug,
+          color: color,
+        })
+      );
+      toast.success("Cập nhập sản phẩm thành công", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    } catch (error) {
+      toast.success("Lỗi hệ thống", {
+        position: "top-right",
+        autoClose: 1500,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+    }
+  };
   const handleSelectedAll = () => {
     if (cartItems.length === selectedItems.length) {
       setCheckEdAll(false);
@@ -292,7 +325,7 @@ const Cart = () => {
                                 {product.item.name}
                               </span>
                             </Link>
-                            {product.item.sizes && (
+                            {product.item.sizes.length > 0 && (
                               <>
                                 <span className="uppercase text-gray-300 ">
                                   <select
@@ -310,6 +343,30 @@ const Cart = () => {
                                     {product.item.sizes.map((size) => (
                                       <option key={size} value={size}>
                                         {size}
+                                      </option>
+                                    ))}
+                                  </select>
+                                </span>
+                              </>
+                            )}
+                            {product.item.colors.length > 0 && (
+                              <>
+                                <span className="uppercase text-gray-300 ">
+                                  <select
+                                    defaultValue={product.yourColor}
+                                    className="bg-gray-50 border border-gray-300 text-gray-300 text-sm rounded-lg p-2.5 uppercase"
+                                    onChange={(
+                                      e: React.ChangeEvent<HTMLSelectElement>
+                                    ) =>
+                                      changeYourColorHandle(
+                                        product.item.slug,
+                                        e.target.value
+                                      )
+                                    }
+                                  >
+                                    {product.item.colors.map((color) => (
+                                      <option key={color} value={color}>
+                                        {color}
                                       </option>
                                     ))}
                                   </select>

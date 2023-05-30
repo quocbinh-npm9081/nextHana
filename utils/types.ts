@@ -18,6 +18,7 @@ export interface IProduct {
   countInStock: number;
   description: string;
   sale: number;
+  colors: (string | undefined)[];
   sizes: (string | undefined)[];
 }
 
@@ -37,6 +38,7 @@ export interface IInfoProduct {
   status: string;
   totalPrice: number | undefined;
   yourSize: string | undefined;
+  yourColor: string | undefined;
 }
 
 export interface IPayloadActionCart {

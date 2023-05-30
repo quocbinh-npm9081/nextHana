@@ -1,227 +1,128 @@
-/*
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
-*/
+import { useAppSelector } from "@/utils/hooks";
+import { selectCart } from "@/utils/slice";
 
 const PlacedOder = () => {
   const products = [
     {
       id: 1,
-      name: "Nomad Tumbler",
-      description:
-        "This durable and portable insulated tumbler will keep your beverage at the perfect temperature during your next adventure.",
+      name: "Basic Tee",
       href: "#",
-      price: "35.00",
-      status: "Preparing to ship",
-      step: 1,
-      date: "March 24, 2021",
-      datetime: "2021-03-24",
-      address: ["Floyd Miles", "7363 Cynthia Pass", "Toronto, ON N3Y 4H8"],
-      email: "f•••@example.com",
-      phone: "1•••••••••40",
+      price: "$36.00",
+      color: "Charcoal",
+      size: "L",
       imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/confirmation-page-03-product-01.jpg",
-      imageAlt: "Insulated bottle with white base and black snap lid.",
-    },
-    {
-      id: 2,
-      name: "Minimalist Wristwatch",
-      description:
-        "This contemporary wristwatch has a clean, minimalist look and high quality components.",
-      href: "#",
-      price: "149.00",
-      status: "Shipped",
-      step: 0,
-      date: "March 23, 2021",
-      datetime: "2021-03-23",
-      address: ["Floyd Miles", "7363 Cynthia Pass", "Toronto, ON N3Y 4H8"],
-      email: "f•••@example.com",
-      phone: "1•••••••••40",
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/confirmation-page-03-product-02.jpg",
-      imageAlt:
-        "Arm modeling wristwatch with black leather band, white watch face, thin watch hands, and fine time markings.",
+        "https://tailwindui.com/img/ecommerce-images/confirmation-page-06-product-01.jpg",
+      imageAlt: "Model wearing men's charcoal basic tee in large.",
     },
     // More products...
   ];
-  function classNames(...classes: any) {
-    return classes.filter(Boolean).join(" ");
-  }
+  const { cart, shippingWards } = useAppSelector(selectCart);
+  const { cartItems } = cart;
+  const { userInfo } = shippingWards;
+  console.log({ cart, shippingWards });
   return (
-    <div className="bg-gray-50">
-      <div className="max-w-2xl mx-auto pt-16 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
-        <div className="px-4 space-y-2 sm:px-0 sm:flex sm:items-baseline sm:justify-between sm:space-y-0">
-          <div className="flex sm:items-baseline sm:space-x-4">
-            <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-              Order #54879
-            </h1>
-            <a
-              href="#"
-              className="hidden text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:block"
-            >
-              View invoice<span aria-hidden="true"> &rarr;</span>
-            </a>
-          </div>
-          <p className="text-sm text-gray-600">
-            Order placed{" "}
-            <time dateTime="2021-03-22" className="font-medium text-gray-900">
-              March 22, 2021
-            </time>
-          </p>
-          <a
-            href="#"
-            className="text-sm font-medium text-indigo-600 hover:text-indigo-500 sm:hidden"
-          >
-            View invoice<span aria-hidden="true"> &rarr;</span>
-          </a>
+    <>
+      {/*
+        This example requires updating your template:
+
+        ```
+        <html class="h-full bg-white">
+        <body class="h-full">
+        ```
+      */}
+      <main className="relative lg:min-h-full">
+        <div className="h-80 overflow-hidden lg:absolute lg:w-1/2 lg:h-full lg:pr-4 xl:pr-12">
+          <img
+            src="https://tailwindui.com/img/ecommerce-images/confirmation-page-06-hero.jpg"
+            alt="TODO"
+            className="h-full w-full object-center object-cover"
+          />
         </div>
 
-        {/* Products */}
-        <div className="mt-6">
-          <h2 className="sr-only">Products purchased</h2>
+        <div>
+          <div className="max-w-2xl mx-auto py-16 px-4 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8 lg:py-32 lg:grid lg:grid-cols-2 lg:gap-x-8 xl:gap-x-24">
+            <div className="lg:col-start-2">
+              <h1 className="text-sm font-medium text-indigo-600">
+                Đặt hàng thành công !
+              </h1>
+              <p className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
+                Cảm ơn bạn đã mua hàng
+              </p>
+              <p className="mt-2 text-base text-gray-500">
+                Hana chân thành cảm ơn đơn đặt hàng của bạn, chúng tôi hiện đang
+                xử lý nó. Vì vậy, hãy chờ đợi và chúng tôi sẽ sớm xác nhận!
+              </p>
 
-          <div className="space-y-8">
-            {products.map((product) => (
-              <div
-                key={product.id}
-                className="bg-white border-t border-b border-gray-200 shadow-sm sm:border sm:rounded-lg"
+              <dl className="mt-16 text-sm font-medium">
+                <dt className="text-gray-900">Mã đơn hàng:</dt>
+                <dd className="mt-2 text-indigo-600">51547878755545848512</dd>
+              </dl>
+
+              <ul
+                role="list"
+                className="mt-6 text-sm font-medium text-gray-500 border-t border-gray-200 divide-y divide-gray-200"
               >
-                <div className="py-6 px-4 sm:px-6 lg:grid lg:grid-cols-12 lg:gap-x-8 lg:p-8">
-                  <div className="sm:flex lg:col-span-7">
-                    <div className="flex-shrink-0 w-full aspect-w-1 aspect-h-1 rounded-lg overflow-hidden sm:aspect-none sm:w-40 sm:h-40">
-                      <img
-                        src={product.imageSrc}
-                        alt={product.imageAlt}
-                        className="w-full h-full object-center object-cover sm:w-full sm:h-full"
-                      />
-                    </div>
-
-                    <div className="mt-6 sm:mt-0 sm:ml-6">
-                      <h3 className="text-base font-medium text-gray-900">
-                        <a href={product.href}>{product.name}</a>
+                {cartItems.map((product: any, index: number) => (
+                  <li key={index} className="flex py-6 space-x-6">
+                    <img
+                      src={product.item.images[0]}
+                      alt={product.item.images[0]}
+                      className="flex-none w-24 h-24 bg-gray-100 rounded-md object-center object-cover"
+                    />
+                    <div className="flex-auto space-y-1">
+                      <h3 className="text-gray-900">
+                        <a href={product.href}>{product.item.name}</a>
                       </h3>
-                      <p className="mt-2 text-sm font-medium text-gray-900">
-                        ${product.price}
+                      <p>Số lượng: {product.quantity}</p>
+                      <p className="capitalize">
+                        {" "}
+                        {product.yourColor ? product.yourColor : ""}
                       </p>
-                      <p className="mt-3 text-sm text-gray-500">
-                        {product.description}
-                      </p>
+                      <p>Size: {product.yourSize}</p>
                     </div>
-                  </div>
+                    <p className="flex-none font-medium text-gray-900">
+                      Tổng giá: {product.totalPrice}
+                    </p>
+                  </li>
+                ))}
+              </ul>
 
-                  <div className="mt-6 lg:mt-0 lg:col-span-5">
-                    <dl className="grid grid-cols-2 gap-x-6 text-sm">
-                      <div>
-                        <dt className="font-medium text-gray-900">
-                          Delivery address
-                        </dt>
-                        <dd className="mt-3 text-gray-500">
-                          <span className="block">{product.address[0]}</span>
-                          <span className="block">{product.address[1]}</span>
-                          <span className="block">{product.address[2]}</span>
-                        </dd>
-                      </div>
-                      <div>
-                        <dt className="font-medium text-gray-900">
-                          Shipping updates
-                        </dt>
-                        <dd className="mt-3 text-gray-500 space-y-3">
-                          <p>{product.email}</p>
-                          <p>{product.phone}</p>
-                          <button
-                            type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                          >
-                            Edit
-                          </button>
-                        </dd>
-                      </div>
-                    </dl>
-                  </div>
+              <dl className="text-sm font-medium text-gray-500 space-y-6 border-t border-gray-200 pt-6">
+                <div className="flex justify-between">
+                  <dt>Tổng giá sản phẩm: </dt>
+                  <dd className="text-gray-900">$72.00</dd>
                 </div>
 
-                <div className="border-t border-gray-200 py-6 px-4 sm:px-6 lg:p-8">
-                  <h4 className="sr-only">Status</h4>
-                  <p className="text-sm font-medium text-gray-900">
-                    {product.status} on{" "}
-                    <time dateTime={product.datetime}>{product.date}</time>
-                  </p>
-                  <div className="mt-6" aria-hidden="true">
-                    <div className="bg-gray-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-2 bg-indigo-600 rounded-full"
-                        style={{
-                          width: `calc((${product.step} * 2 + 1) / 8 * 100%)`,
-                        }}
-                      />
-                    </div>
-                    <div className="hidden sm:grid grid-cols-4 text-sm font-medium text-gray-600 mt-6">
-                      <div className="text-indigo-600">Order placed</div>
-                      <div
-                        className={classNames(
-                          product.step > 0 ? "text-indigo-600" : "",
-                          "text-center"
-                        )}
-                      >
-                        Processing
-                      </div>
-                      <div
-                        className={classNames(
-                          product.step > 1 ? "text-indigo-600" : "",
-                          "text-center"
-                        )}
-                      >
-                        Shipped
-                      </div>
-                      <div
-                        className={classNames(
-                          product.step > 2 ? "text-indigo-600" : "",
-                          "text-right"
-                        )}
-                      >
-                        Delivered
-                      </div>
-                    </div>
-                  </div>
+                <div className="flex justify-between">
+                  <dt>Phí vận chuyển: </dt>
+                  <dd className="text-gray-900">$8.00</dd>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        {/* Billing */}
-        <div className="mt-16">
-          <h2 className="sr-only">Billing Summary</h2>
+                <div className="flex items-center justify-between border-t border-gray-200 text-gray-900 pt-6">
+                  <dt className="text-base">Tổng giá trị đơn hàng:</dt>
+                  <dd className="text-base">$86.40</dd>
+                </div>
+              </dl>
 
-          <div className="bg-gray-100 py-6 px-4 sm:px-6 sm:rounded-lg lg:px-8 lg:py-8 lg:grid lg:grid-cols-12 lg:gap-x-8">
-            <dl className="grid grid-cols-2 gap-6 text-sm sm:grid-cols-2 md:gap-x-8 lg:col-span-7">
-              <div>
-                <dt className="font-medium text-gray-900">Billing address</dt>
-                <dd className="mt-3 text-gray-500">
-                  <span className="block">Floyd Miles</span>
-                  <span className="block">7363 Cynthia Pass</span>
-                  <span className="block">Toronto, ON N3Y 4H8</span>
-                </dd>
-              </div>
-              <div>
-                <dt className="font-medium text-gray-900">
-                  Payment information
-                </dt>
-                <div className="mt-3">
-                  <dd className="-ml-4 -mt-4 flex flex-wrap">
-                    <div className="ml-4 mt-4 flex-shrink-0">
+              <dl className="mt-16 grid grid-cols-2 gap-x-4 text-sm text-gray-600">
+                <div>
+                  <dt className="font-medium text-gray-900">
+                    Địa chỉ nhận hàng
+                  </dt>
+                  <dd className="mt-2">
+                    <address className="not-italic">
+                      <span className="block">Kristin Watson</span>
+                      <span className="block">7363 Cynthia Pass</span>
+                      <span className="block">Toronto, ON N3Y 4H8</span>
+                    </address>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="font-medium text-gray-900">
+                    Phương thức thanh toán
+                  </dt>
+                  <dd className="mt-2 space-y-2 sm:flex sm:space-y-0 sm:space-x-4">
+                    <div className="flex-none">
                       <svg
                         aria-hidden="true"
                         width={36}
@@ -238,37 +139,27 @@ const PlacedOder = () => {
                       </svg>
                       <p className="sr-only">Visa</p>
                     </div>
-                    <div className="ml-4 mt-4">
+                    <div className="flex-auto">
                       <p className="text-gray-900">Ending with 4242</p>
-                      <p className="text-gray-600">Expires 02 / 24</p>
+                      <p>Expires 12 / 21</p>
                     </div>
                   </dd>
                 </div>
-              </div>
-            </dl>
+              </dl>
 
-            <dl className="mt-8 divide-y divide-gray-200 text-sm lg:mt-0 lg:col-span-5">
-              <div className="pb-4 flex items-center justify-between">
-                <dt className="text-gray-600">Subtotal</dt>
-                <dd className="font-medium text-gray-900">$72</dd>
+              <div className="mt-16 border-t border-gray-200 py-6 text-right">
+                <a
+                  href="#"
+                  className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                >
+                  Continue Shopping<span aria-hidden="true"> &rarr;</span>
+                </a>
               </div>
-              <div className="py-4 flex items-center justify-between">
-                <dt className="text-gray-600">Shipping</dt>
-                <dd className="font-medium text-gray-900">$5</dd>
-              </div>
-              <div className="py-4 flex items-center justify-between">
-                <dt className="text-gray-600">Tax</dt>
-                <dd className="font-medium text-gray-900">$6.16</dd>
-              </div>
-              <div className="pt-4 flex items-center justify-between">
-                <dt className="font-medium text-gray-900">Order total</dt>
-                <dd className="font-medium text-indigo-600">$83.16</dd>
-              </div>
-            </dl>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 };
 export default PlacedOder;
