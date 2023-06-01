@@ -91,7 +91,7 @@ const PlacedOder = () => {
                 <dl className="text-sm font-medium text-gray-500 space-y-6 border-t border-gray-200 pt-6">
                   <div className="flex justify-between">
                     <dt>Tổng giá sản phẩm: </dt>
-                    <dd className="text-gray-900">$72.00</dd>
+                    <dd className="text-gray-900">{cart.totalCost} VND</dd>
                   </div>
 
                   <div className="flex justify-between">
