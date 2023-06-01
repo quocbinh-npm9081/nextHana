@@ -218,84 +218,86 @@ const ProductDetail = ({ product }: IProps) => {
                   +
                 </button>
               </div>
-              {product.sizes.length > 0 && (
-                <div className="flex ml-6 items-center">
-                  <span className="mr-3">Size</span>
-                  <div className="relative">
-                    <select
-                      onChange={(e) => changeYourSize(e.target.value)}
-                      className="uppercase rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
-                    >
-                      {product.sizes.map(
-                        (size: string | undefined, index: number) => {
-                          return (
-                            <option
-                              className="uppercase"
-                              key={size}
-                              value={size}
-                            >
-                              {size}
-                            </option>
-                          );
-                        }
-                      )}
-                    </select>
-
-                    <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="w-4 h-4"
-                        viewBox="0 0 24 24"
+              <div className="flex flex-col items-end md:flex-row w-full">
+                {product.sizes.length > 0 && (
+                  <div className="flex ml-6 items-center mb-2 md:mb-0">
+                    <span className="mr-3">Size</span>
+                    <div className="relative">
+                      <select
+                        onChange={(e) => changeYourSize(e.target.value)}
+                        className="uppercase rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
                       >
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
-                  </div>
-                </div>
-              )}
-              {product.colors.length > 0 && (
-                <div className="flex ml-6 items-center">
-                  <span className="mr-3">Color:</span>
-                  <div className="relative">
-                    <select
-                      onChange={(e) => changeYourColor(e.target.value)}
-                      className=" capitalize rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
-                    >
-                      {product.colors.map(
-                        (color: string | undefined, index: number) => {
-                          return (
-                            <option
-                              className="capitalize"
-                              key={color}
-                              value={color}
-                            >
-                              {color}
-                            </option>
-                          );
-                        }
-                      )}
-                    </select>
+                        {product.sizes.map(
+                          (size: string | undefined, index: number) => {
+                            return (
+                              <option
+                                className="uppercase"
+                                key={size}
+                                value={size}
+                              >
+                                {size}
+                              </option>
+                            );
+                          }
+                        )}
+                      </select>
 
-                    <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
-                      <svg
-                        fill="none"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        className="w-4 h-4"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M6 9l6 6 6-6"></path>
-                      </svg>
-                    </span>
+                      <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                        <svg
+                          fill="none"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          className="w-4 h-4"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                      </span>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+                {product.colors.length > 0 && (
+                  <div className="flex ml-6 items-center">
+                    <span className="mr-3">Color:</span>
+                    <div className="relative">
+                      <select
+                        onChange={(e) => changeYourColor(e.target.value)}
+                        className=" capitalize rounded border appearance-none border-gray-400 py-2 focus:outline-none focus:border-red-500 text-base pl-3 pr-10"
+                      >
+                        {product.colors.map(
+                          (color: string | undefined, index: number) => {
+                            return (
+                              <option
+                                className="capitalize"
+                                key={color}
+                                value={color}
+                              >
+                                {color}
+                              </option>
+                            );
+                          }
+                        )}
+                      </select>
+
+                      <span className="absolute right-0 top-0 h-full w-10 text-center text-gray-600 pointer-events-none flex items-center justify-center">
+                        <svg
+                          fill="none"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth="2"
+                          className="w-4 h-4"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M6 9l6 6 6-6"></path>
+                        </svg>
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
             <div className="flex justify-start items-center">
               <span className="flex flex-col items-start justify-between">
