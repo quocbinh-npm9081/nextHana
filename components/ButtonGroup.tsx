@@ -5,6 +5,8 @@ import {
   saveInfoAndChangeTabShipping,
   changeTabGroupShipping,
 } from "@/utils/slice";
+import { toast } from "react-toastify";
+
 import { useAppDispatch } from "@/utils/hooks";
 interface IPlan {
   id: string;
@@ -28,8 +30,19 @@ function ButtonGroup({ plans }: IProps) {
         index: 2,
       },
     };
+
     try {
       dispatch(saveInfoAndChangeTabShipping(dataAction));
+      toast.success("Đặt hàng thành công !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
     } catch (error) {
       console.log(error);
     }

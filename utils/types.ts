@@ -31,7 +31,10 @@ export interface ICategory {
 export interface IBanner {
   image: string;
 }
-
+export interface IInfoCart {
+  cartItems: IInfoProduct[];
+  totalPrice: number;
+}
 export interface IInfoProduct {
   item: IProduct;
   quantity: number | undefined;
@@ -43,7 +46,7 @@ export interface IInfoProduct {
 
 export interface IPayloadActionCart {
   type: string;
-  payload: IInfoProduct;
+  payload: IInfoCart;
 }
 
 export interface IUserCredentials {
@@ -68,3 +71,8 @@ export interface IParamsJwtCallBacks {
 export interface ISession {
   user: User;
 }
+
+export const paymentMethods = {
+  thanhtoankhinhanhang: "Thanh toán khi nhận hàng",
+  thanhtoanbangmomo: "Thanh toán bằng Momo",
+};

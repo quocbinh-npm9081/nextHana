@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const ProductItem = ({ product }: any) => {
   return (
@@ -9,7 +10,10 @@ const ProductItem = ({ product }: any) => {
           <div className="absolute p-2 h-14 w-14 text-white rounded-full bg-red-600 flex justify-center items-center top-3 left-4">
             -{product.sale}%
           </div>
-          <img
+          <Image
+            width={350}
+            height={350}
+            quality={100}
             src={product.images[0]}
             alt={product.name}
             className="rounded-sm shadow"

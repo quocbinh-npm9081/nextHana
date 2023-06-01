@@ -6,6 +6,8 @@ import {
   updateYourSize,
   updateYourColor,
   selectCart,
+  calTotalPrice,
+  addToCartAndCalTotalCost,
 } from "@/utils/slice";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -44,7 +46,7 @@ const Cart = () => {
             item: { ...existItem.item },
             quantity: count,
             status: "ordered",
-            totalPrice: undefined,
+            totalPrice: totalPrice,
             yourSize: existItem.yourSize,
             yourColor: existItem.yourColor,
           })
@@ -71,7 +73,7 @@ const Cart = () => {
               item: { ...existItem.item },
               quantity: count,
               status: "ordered",
-              totalPrice: undefined,
+              totalPrice: totalPrice,
               yourSize: existItem.yourSize,
               yourColor: existItem.yourColor,
             })
@@ -210,7 +212,7 @@ const Cart = () => {
         total + Number(current.totalPrice),
       0
     );
-  }, [selectedItems, cartItems]);
+  }, [selectedItems]);
 
   useEffect(() => {
     if (selectedItems) {
@@ -225,6 +227,11 @@ const Cart = () => {
   useEffect(() => {
     setTotalPrice(totalCost);
   }, [selectedItems]);
+
+  useEffect(() => {
+    dispatch(calTotalPrice(totalPrice));
+  }, [totalPrice, dispatch]);
+
   return (
     <Layout title="Giỏ hàng">
       {showModal ? (

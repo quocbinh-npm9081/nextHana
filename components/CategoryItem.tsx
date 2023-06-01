@@ -8,10 +8,11 @@ const CategoryItem = ({ category }: any) => {
       <Link href={`/category/${category.slug}`} legacyBehavior>
         <a className="flex flex-col items-center justify-start h-52 overflow-hidden relative p-2">
           <Image
-            fill={true}
+            width={350}
+            height={250}
             src={category.image}
             alt={category.name}
-            className="rounded-sm shadow w-full h-full"
+            className="rounded-sm shadow "
           />
           <div className="absolute left-10  top-14 text-lg">
             <h2>{category.name}</h2>

@@ -9,6 +9,11 @@ const data = {
         isActive: true,
       },
     ],
+    thank: [
+      {
+        image: "/static/images/backgrounds/thank/hana-gif-thank.jpg",
+      },
+    ],
   },
   products: [
     {
@@ -29,6 +34,7 @@ const data = {
       sale: 0,
       colors: [],
       sizes: ["s", "l", "m"],
+      href: "/product/ao-nikken",
     },
     {
       name: "vbn Pants",
@@ -48,8 +54,8 @@ const data = {
         "Ut Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur. enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
       sale: 10,
       colors: [],
-
       sizes: ["s", "l", "m"],
+      href: "/product/vbn-Pandfts",
     },
     {
       name: "121212 Pants",
@@ -69,8 +75,8 @@ const data = {
         "Ut enim vUt enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur. ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.",
       sale: 10,
       colors: ["Đỏ"],
-
       sizes: ["s", "l", "m"],
+      href: "/product/121212-Pantsxz",
     },
     {
       name: "jjjjjjjj",
@@ -90,6 +96,7 @@ const data = {
       sale: 10,
       colors: ["xanh", "vàng"],
       sizes: ["s", "l", "m"],
+      href: "/product/jjjjjjjj",
     },
   ],
   categories: [

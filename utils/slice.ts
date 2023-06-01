@@ -5,7 +5,7 @@ import {
   current,
 } from "@reduxjs/toolkit";
 import { RootState } from "./store";
-import { IInfoProduct } from "./types";
+import { IInfoProduct, IInfoCart } from "./types";
 import Cookies from "js-cookie";
 
 //STATES
@@ -25,7 +25,7 @@ const initialCartState: any = {
       },
 };
 interface IPayloadMutilple {
-  type: string;
+  type?: string;
   data: any;
 }
 // SELECTORS
@@ -69,6 +69,7 @@ export const cartSlice = createSlice({
           cart: { cartItems },
         };
       }
+      // return state;
     },
     removeProductInCart: (state, action: PayloadAction<{ slug: string }>) => {
       const itemIndex: any = state.cart.cartItems.findIndex(
@@ -139,7 +140,8 @@ export const cartSlice = createSlice({
       };
     },
     savePaymentMethod(state, action: PayloadAction<any>) {
-      const paymentMethod: string = action.payload.method;
+      const paymentMethod: string =
+        action.payload.data.method.hana_paymentMethod;
       const { shippingWards } = state;
 
       Cookies.set(
@@ -182,6 +184,19 @@ export const cartSlice = createSlice({
         },
       };
     },
+    calTotalPrice(state, action: PayloadAction<any>) {
+      const totalCost = action.payload;
+      const { cartItems } = state.cart;
+      Cookies.set(
+        "cart",
+        JSON.stringify({ ...state, cart: { cartItems, totalCost: totalCost } })
+      );
+
+      return {
+        ...state,
+        cart: { cartItems, totalCost: totalCost },
+      };
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -190,6 +205,12 @@ export const cartSlice = createSlice({
       })
       .addCase(saveInfoAndChangeTabShipping.fulfilled, (state) => {
         state.loading = false;
+      })
+      .addCase(addToCartAndCalTotalCost.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addToCartAndCalTotalCost.fulfilled, (state) => {
+        state.loading = false;
       });
   },
 });
@@ -197,9 +218,9 @@ export const cartSlice = createSlice({
 //MUlTIPLE ACTION
 //save info and change tab shipping
 export const saveInfoAndChangeTabShipping = createAsyncThunk(
-  "users/fetchByIdStatus",
+  "users/saveInfoAndChangeTabShipping",
   async (payload: IPayloadMutilple, { dispatch }) => {
-    switch (payload.type) {
+    switch (String(payload.type)) {
       case "SAVE_USER_INFO":
         dispatch(
           saveUserInfor({
@@ -223,6 +244,14 @@ export const saveInfoAndChangeTabShipping = createAsyncThunk(
   }
 );
 
+export const addToCartAndCalTotalCost = createAsyncThunk(
+  "users/addToCartAndCalTotalCost",
+  async (payload: IPayloadMutilple, { dispatch }) => {
+    dispatch(addProductToCart(payload.data.item));
+    dispatch(calTotalPrice(payload.data.totalPrice));
+  }
+);
+
 // ACTIONS
 export const {
   addProductToCart,
@@ -232,6 +261,7 @@ export const {
   saveUserInfor,
   savePaymentMethod,
   changeTabGroupShipping,
+  calTotalPrice,
 } = cartSlice.actions;
 
 //REDUCERS

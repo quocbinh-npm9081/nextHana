@@ -1,6 +1,8 @@
 import React, { useRef } from "react";
 import ButtonGroup from "../ButtonGroup";
 import FormProviderWrapper from "../Form/FormProviderWrapper";
+import { paymentMethods } from "@/utils/types";
+
 import * as yup from "yup";
 interface IProps {
   setSelectedIndex: (e: number) => any;
@@ -9,12 +11,12 @@ const Payment = ({ setSelectedIndex }: IProps) => {
   const plans = useRef([
     {
       id: "thanhtoankhinhanhang",
-      name: "Thanh toán khi nhận hàng",
+      name: paymentMethods.thanhtoankhinhanhang,
       logo: "https://developers.momo.vn/v3/vi/img/logo.svg",
     },
     {
       id: "thanhtoanbangmomo",
-      name: "Thanh toán bằng Momo",
+      name: paymentMethods.thanhtoanbangmomo,
       logo: "https://developers.momo.vn/v3/vi/img/logo.svg",
     },
   ]);
