@@ -10,6 +10,7 @@ import { SignInResponse, signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { BsFacebook } from "react-icons/bs";
+import Image from "next/image";
 
 const Login = () => {
   const router = useRouter();
@@ -87,16 +88,16 @@ const Login = () => {
 
   return (
     <Layout title="Login">
-      <div
-        className="min-w-screen min-h-screen flex-col mx-auto flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundPosition: "center",
-          backgroundSize: "cover",
-          backgroundImage: `url(${data.backgrounds.loginPage[0].image} )`,
-        }}
-      >
+      <div className="relative min-w-screen min-h-screen flex-col mx-auto flex items-center justify-center overflow-hidden">
+        <Image
+          loading="eager"
+          src={`${data.backgrounds.loginPage[0].image}`}
+          width={3080}
+          height={3080}
+          alt="Login background"
+        />
         <form
-          className="bg-white max-w-xs shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          className="absolute mx-auto bg-white max-w-xs shadow-md rounded px-8 pt-6 pb-8 "
           onSubmit={handleSubmit(onSubmit)}
         >
           <div className="mb-6">
