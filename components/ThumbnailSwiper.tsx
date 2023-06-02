@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Thumbs } from "swiper";
-
+import Image from "next/image";
 import "swiper/css";
 // Import Swiper styles
 import "swiper/css";
@@ -28,7 +28,12 @@ const ThumbnailSwiper: React.FC<MainSwiperProps> = ({ images }) => {
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <img src={image} alt={`Thumbnail ${index}`} />
+            <Image
+              width={600}
+              height={200}
+              src={image}
+              alt={`Thumbnail ${index}`}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -45,7 +50,12 @@ const ThumbnailSwiper: React.FC<MainSwiperProps> = ({ images }) => {
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <img src={image} alt={`Thumbnail ${index}`} />
+            <Image
+              width={200}
+              height={100}
+              src={image}
+              alt={`Thumbnail ${index}`}
+            />
           </SwiperSlide>
         ))}
       </Swiper>

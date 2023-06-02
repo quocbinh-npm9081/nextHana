@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 interface IProps {
@@ -11,7 +12,7 @@ const BreakCrumb = ({ image, title }: IProps) => {
 
   return (
     <div className="flex flex-col relative justify-center items-start">
-      <img src={image} alt={image} />
+      <Image width={3080} height={210} src={image} alt={image} />
       <div className="flex flex-col absolute px-5">
         <h1 className="breakcrumb_title">{title}</h1>
 
