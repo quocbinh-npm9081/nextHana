@@ -1,28 +1,31 @@
 import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Thumbs } from "swiper";
+//import SwiperCore, { Navigation, Thumbs, FreeMode } from "swiper";
 import Image from "next/image";
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
+import { Autoplay, Pagination, Navigation } from "swiper";
+
 interface MainSwiperProps {
   images: string[];
 }
-SwiperCore.use([Navigation, Thumbs]);
+// SwiperCore.use([Navigation, Thumbs, FreeMode]);
 
 const ThumbnailSwiper: React.FC<MainSwiperProps> = ({ images }) => {
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
+  // const [thumbsSwiper, setThumbsSwiper] = useState<SwiperCore | null>(null);
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <Swiper
+      {/* <Swiper
         thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
-        loop={true}
-        spaceBetween={20}
+        spaceBetween={10}
         navigation={true}
+        modules={[FreeMode, Navigation, Thumbs]}
         grabCursor={true} // su dung chuot de keo tha
-        className="product-images-slider"
+        className="productImagesSlider"
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
@@ -34,8 +37,8 @@ const ThumbnailSwiper: React.FC<MainSwiperProps> = ({ images }) => {
             />
           </SwiperSlide>
         ))}
-      </Swiper>
-      <Swiper
+      </Swiper> */}
+      {/* <Swiper
         onSwiper={setThumbsSwiper}
         loop={true}
         spaceBetween={10}
@@ -44,13 +47,36 @@ const ThumbnailSwiper: React.FC<MainSwiperProps> = ({ images }) => {
         observer={true}
         observeParents={true}
         watchSlidesProgress={true}
-        className="product-images-slider-thumbs"
+        modules={[FreeMode, Navigation, Thumbs]}
+        className="productImagesSliderThumbs"
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
             <Image
               width={200}
               height={100}
+              src={image}
+              alt={`Thumbnail ${index}`}
+            />
+          </SwiperSlide>
+        ))}
+      </Swiper> */}
+      <Swiper
+        loop={true}
+        spaceBetween={20}
+        centeredSlides={true}
+        pagination={{
+          clickable: true,
+        }}
+        navigation={true}
+        modules={[Autoplay, Pagination, Navigation]}
+        className="banner"
+      >
+        {images.map((image, index) => (
+          <SwiperSlide key={index}>
+            <Image
+              width={600}
+              height={200}
               src={image}
               alt={`Thumbnail ${index}`}
             />

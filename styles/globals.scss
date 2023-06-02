@@ -45,23 +45,24 @@ textarea {
 }
 
 /* thumbnail product */
-.product-images-slider {
-  .swiper-slide {
-    padding-top: 73%;
-    @apply overflow-hidden relative;
-    img {
-      @apply absolute top-0 left-0 w-full;
-    }
-  }
+
+.productImagesSlider .swiper-slide {
+  padding-top: 73%;
+  @apply overflow-hidden relative;
 }
-.product-images-slider-thumbs {
+.productImagesSlider .swiper-slide img {
+  @apply absolute top-0 left-0 w-full;
+}
+.productImagesSliderThumbs {
   @apply mt-3;
-  .swiper-slide {
-    @apply cursor-pointer	opacity-60;
-    &-thumb-active {
-      @apply opacity-100 border-2;
-    }
-  }
+}
+
+.productImagesSliderThumbs .swiper-slide {
+  @apply cursor-pointer	opacity-60;
+}
+
+.productImagesSliderThumbs .swiper-slide.swiper-slide-thumb-active {
+  @apply opacity-100 border-2;
 }
 
 .webkit-line-clamp-truncate {
