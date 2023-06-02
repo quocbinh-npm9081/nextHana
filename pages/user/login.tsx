@@ -92,8 +92,8 @@ const Login = () => {
         <Image
           loading="eager"
           src={`${data.backgrounds.loginPage[0].image}`}
-          width={3080}
-          height={3080}
+          width={1110}
+          height={740}
           alt="Login background"
         />
         <form
