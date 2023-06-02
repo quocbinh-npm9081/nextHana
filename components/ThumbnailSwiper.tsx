@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Navigation, Thumbs } from "swiper";
 import Image from "next/image";
-import "swiper/css";
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-
 interface MainSwiperProps {
   images: string[];
 }
