@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import Layout from "@/components/Layout";
 import data from "@/utils/data";
 import dynamic from "next/dynamic";
@@ -88,14 +88,22 @@ const Login = () => {
 
   return (
     <Layout title="Login">
-      <div className="relative min-w-screen min-h-screen flex-col mx-auto flex items-center justify-center overflow-hidden">
-        <Image
-          loading="eager"
+      <div
+        className="relative min-w-screen min-h-screen flex-col mx-auto flex items-center justify-center overflow-hidden"
+        style={{
+          backgroundImage: `url(${data.backgrounds.loginPage[0].image})`,
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+        }}
+      >
+        {/* <Image
           src={`${data.backgrounds.loginPage[0].image}`}
           width={3080}
           height={1840}
+          loading="eager"
           alt="Login background"
-        />
+          className="h-auto"
+        /> */}
         <form
           className="absolute mx-auto bg-white max-w-xs shadow-md rounded px-8 pt-6 pb-8 "
           onSubmit={handleSubmit(onSubmit)}
