@@ -12,7 +12,13 @@ const BreakCrumb = ({ image, title }: IProps) => {
 
   return (
     <div className="flex flex-col relative justify-center items-start">
-      <Image width={3080} height={210} src={image} alt={image} />
+      <Image
+        width={3080}
+        height={210}
+        src={image}
+        alt={image}
+        title="BreakCrumb"
+      />
       <div className="flex flex-col absolute px-5">
         <h1 className="breakcrumb_title">{title}</h1>
 

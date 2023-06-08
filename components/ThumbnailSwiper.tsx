@@ -79,6 +79,7 @@ const ThumbnailSwiper: React.FC<MainSwiperProps> = ({ images }) => {
               height={200}
               src={image}
               alt={`Thumbnail ${index}`}
+              title="ThumbnailSwiper"
             />
           </SwiperSlide>
         ))}

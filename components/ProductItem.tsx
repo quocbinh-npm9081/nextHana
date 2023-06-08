@@ -17,6 +17,7 @@ const ProductItem = ({ product }: any) => {
             src={product.images[0]}
             alt={product.name}
             className="rounded-sm shadow"
+            title="ProductItem"
           />
           <div className="flex-col flex items-start ">
             <h3>{product.name}</h3>

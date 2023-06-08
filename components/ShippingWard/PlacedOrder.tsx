@@ -9,7 +9,6 @@ const PlacedOder = () => {
   const { cartItems } = cart;
   const { userInfo } = shippingWards;
   const { backgrounds } = data;
-  console.log({ cart, shippingWards });
   return (
     <>
       {/*
@@ -29,7 +28,8 @@ const PlacedOder = () => {
               quality={100}
               src={backgrounds.thank[0].image}
               alt="image"
-              className="h-full w-full object-center object-cover "
+              className="h-full w-full object-center object-cover"
+              title="PlacedOder"
             />
           </div>
 
@@ -64,7 +64,8 @@ const PlacedOder = () => {
                         width={100}
                         src={product.item.images[0]}
                         alt={product.item.images[0]}
-                        className="flex-none first-line:rounded-md "
+                        className="flex-none first-line:rounded-md"
+                        title={`${index}-PlacedOder`}
                       />
                       <div className="flex justify-between w-full">
                         <div className="flex-auto space-y-1">

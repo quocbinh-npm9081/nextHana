@@ -33,6 +33,7 @@ const CarouselBanner = ({ banners }: Iprops) => {
               height={550}
               src={banner.iamge}
               alt={banner.iamge}
+              title="CarouselBanner"
             />
           </SwiperSlide>
         ))}

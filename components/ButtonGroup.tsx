@@ -76,6 +76,7 @@ function ButtonGroup({ plans }: IProps) {
                   src={String(method.logo)}
                   width={54}
                   height={54}
+                  title="logo"
                 />
                 <span className="text-sm font-semibold ">{method.name}</span>
               </label>

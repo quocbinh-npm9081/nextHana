@@ -324,6 +324,7 @@ const Cart = () => {
                               width={150}
                               height={150}
                               alt={product.item.name}
+                              title="Cart"
                             />
                           </Link>
                           <div className="flex flex-col justify-center ml-5">

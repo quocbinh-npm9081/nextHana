@@ -12,7 +12,8 @@ const CategoryItem = ({ category }: any) => {
             height={250}
             src={category.image}
             alt={category.name}
-            className="rounded-sm shadow "
+            className="rounded-sm shadow"
+            title="CategoryItem"
           />
           <div className="absolute left-10  top-14 text-lg">
             <h2>{category.name}</h2>

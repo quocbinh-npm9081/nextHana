@@ -128,6 +128,7 @@ const Login = () => {
               id="phoneNumber"
               type="text"
               placeholder="Số điện thoại"
+              autoComplete="on"
             />
             {errors.phoneNumber?.message ? (
               <p className="text-red-500 text-xs italic">
@@ -152,6 +153,7 @@ const Login = () => {
               id="password"
               type="password"
               placeholder="******************"
+              autoComplete="on"
             />
             {errors.password?.message ? (
               <p className="text-red-500 text-xs italic">
