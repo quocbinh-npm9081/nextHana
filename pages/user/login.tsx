@@ -1,8 +1,6 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Layout from "@/components/Layout";
-import data from "@/utils/data";
 import dynamic from "next/dynamic";
-import Link from "next/link";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -10,8 +8,8 @@ import { SignInResponse, signIn } from "next-auth/react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { BsFacebook } from "react-icons/bs";
-import Image from "next/image";
-
+import Link from "next/link";
+import data from "@/utils/data";
 const Login = () => {
   const router = useRouter();
   const redirectURL = router.query.callbackUrl as string;
@@ -84,7 +82,6 @@ const Login = () => {
   //     else router.push("/");
   //   }
   // }, [router, session]);
-  console.log("router.query: ", router.query.callbackUrl);
 
   return (
     <Layout title="Login">
@@ -96,14 +93,6 @@ const Login = () => {
           backgroundSize: "cover",
         }}
       >
-        {/* <Image
-          src={`${data.backgrounds.loginPage[0].image}`}
-          width={3080}
-          height={1840}
-          loading="eager"
-          alt="Login background"
-          className="h-auto"
-        /> */}
         <form
           className="absolute mx-auto bg-white max-w-xs shadow-md rounded px-8 pt-6 pb-8 "
           onSubmit={handleSubmit(onSubmit)}
@@ -216,7 +205,7 @@ const Login = () => {
             </div>
           </div>
         </form>
-      </div>{" "}
+      </div>
     </Layout>
   );
 };

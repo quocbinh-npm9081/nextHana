@@ -1,8 +1,11 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import Header from "./Header";
 import Footer from "./Footer";
+import Router from "next/router";
+import LoadScreen from "@/components/LoadScreen";
+
 interface IProps {
   title: string | undefined;
   children?: React.ReactNode;
@@ -10,6 +13,19 @@ interface IProps {
 
 export default function Layout({ title, children }: IProps) {
   const { asPath } = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
+  useEffect(() => {
+    Router.events.on("routeChangeStart", (url) => {
+      setIsLoading(true);
+    });
+    Router.events.on("routeChangeComplete", (url) => {
+      setIsLoading(false);
+    });
+
+    Router.events.on("routeChangeError", (url) => {
+      setIsLoading(false);
+    });
+  }, [Router]);
 
   return (
     <>
@@ -29,13 +45,9 @@ export default function Layout({ title, children }: IProps) {
               : "md:mt-28 container m-auto mt-4 px-4"
           }
         >
-          {children}
+          {isLoading ? <LoadScreen /> : <>{children}</>}
         </main>
-
-        {/* <footer className="justify-center items-center flex h-10 shadow-inner">
-          Footer
-        </footer> */}
-        <Footer />
+        {isLoading ? "" : <Footer />}
       </div>
     </>
   );
