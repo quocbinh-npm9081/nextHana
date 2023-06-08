@@ -16,7 +16,11 @@ export default function App({
   return (
     <SessionProvider session={session} refetchInterval={5 * 60}>
       <Provider store={store}>
-        <NextNProgress color="black" height={5} />
+        <NextNProgress
+          color="black"
+          height={5}
+          options={{ showSpinner: false }}
+        />
         <Component {...pageProps} />
         <ToastContainer />
       </Provider>
