@@ -9,8 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/server": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@fortawesome/fontawesome-free": "^6.4.0",
     "@headlessui/react": "^1.7.14",
     "@hookform/resolvers": "^3.1.0",
+    "@mui/material": "^5.13.5",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/js-cookie": "^3.0.3",
     "@types/node": "18.15.0",
@@ -27,6 +32,7 @@
     "next-auth": "^4.22.1",
     "nextjs-progressbar": "^0.0.16",
     "react": "18.2.0",
+    "react-custom-roulette": "^1.4.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",

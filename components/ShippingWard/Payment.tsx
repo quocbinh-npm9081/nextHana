@@ -1,13 +1,15 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ButtonGroup from "../ButtonGroup";
 import FormProviderWrapper from "../Form/FormProviderWrapper";
 import { paymentMethods } from "@/utils/types";
+import { useAppSelector } from "@/utils/hooks";
+import { selectCart } from "@/utils/slice";
 
 import * as yup from "yup";
-interface IProps {
-  setSelectedIndex: (e: number) => any;
-}
-const Payment = ({ setSelectedIndex }: IProps) => {
+type TProps = {
+  handleComplete: () => void;
+};
+const Payment: React.FC<TProps> = ({ handleComplete }) => {
   const plans = useRef([
     {
       id: "thanhtoankhinhanhang",
@@ -43,10 +45,7 @@ const Payment = ({ setSelectedIndex }: IProps) => {
                 defaultValues={defaultValues}
                 validation={shemaRadioGroup}
               >
-                <ButtonGroup
-                  setSelectedIndex={setSelectedIndex}
-                  plans={plans}
-                />
+                <ButtonGroup plans={plans} handleComplete={handleComplete} />
               </FormProviderWrapper>
             </div>
           </div>

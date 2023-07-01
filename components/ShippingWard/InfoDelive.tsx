@@ -25,7 +25,10 @@ interface ISelecteValueError {
 interface ISelectedBoxError {
   value: ISelecteValueError;
 }
-const InfoDelive = () => {
+type TProps = {
+  handleComplete: () => void;
+};
+const InfoDelive: React.FC<TProps> = ({ handleComplete }) => {
   const dispatch = useAppDispatch();
   const { loading, shippingWards } = useAppSelector(selectCart);
   const [provinces, setProvinces] = useState<IProvince[]>([]);
@@ -124,6 +127,7 @@ const InfoDelive = () => {
     };
     try {
       dispatch(saveInfoAndChangeTabShipping(dataAction));
+      handleComplete();
     } catch (error) {}
   };
 

@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import NextNProgress from "nextjs-progressbar";
 
 import "react-toastify/dist/ReactToastify.css";
+
 import "../styles/globals.scss";
 
 export default function App({

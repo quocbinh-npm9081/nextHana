@@ -182,3 +182,30 @@ textarea {
     transform: translateX(-31px);
   }
 }
+
+// miniGame
+.bhdLno {
+  position: relative;
+  width: 100vw !important;
+  max-width: 650px !important;
+  height: 100vw !important;
+  max-height: 650px !important;
+  object-fit: contain;
+  flex-shrink: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+img {
+  border: 0;
+}
+
+a {
+  text-decoration: underline;
+}

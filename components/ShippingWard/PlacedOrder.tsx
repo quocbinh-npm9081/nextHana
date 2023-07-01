@@ -4,21 +4,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { paymentMethods } from "@/utils/types";
 import data from "@/utils/data";
-const PlacedOder = () => {
+const PlacedOrder = () => {
   const { cart, shippingWards } = useAppSelector(selectCart);
   const { cartItems } = cart;
   const { userInfo } = shippingWards;
   const { backgrounds } = data;
   return (
     <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
       <main className="p-6 bg-gray-100 flex items-start justify-center">
         <div className=" bg-white relative lg:min-h-full">
           <div className="h-80 overflow-hidden lg:absolute lg:w-1/2 lg:h-full lg:pr-4 xl:pr-12 hidden lg:block">
@@ -179,4 +171,4 @@ const PlacedOder = () => {
     </>
   );
 };
-export default PlacedOder;
+export default PlacedOrder;

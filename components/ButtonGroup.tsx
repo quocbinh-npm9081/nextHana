@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { useFormContext } from "react-hook-form";
 import {
   saveInfoAndChangeTabShipping,
   changeTabGroupShipping,
+  selectCart,
 } from "@/utils/slice";
 import { toast } from "react-toastify";
 
-import { useAppDispatch } from "@/utils/hooks";
+import { useAppDispatch, useAppSelector } from "@/utils/hooks";
 interface IPlan {
   id: string;
   name: string;
@@ -15,11 +16,13 @@ interface IPlan {
 }
 
 interface IProps {
-  setSelectedIndex: (e: number) => any;
+  handleComplete: () => void;
   plans: React.MutableRefObject<IPlan[]>;
 }
 
-function ButtonGroup({ plans }: IProps) {
+function ButtonGroup({ plans, handleComplete }: IProps) {
+  const { shippingWards } = useAppSelector(selectCart);
+
   const methods = useFormContext();
   const dispatch = useAppDispatch();
   const onSubmit = (data: any) => {
@@ -33,6 +36,7 @@ function ButtonGroup({ plans }: IProps) {
 
     try {
       dispatch(saveInfoAndChangeTabShipping(dataAction));
+      handleComplete();
       toast.success("Đặt hàng thành công !", {
         position: "top-right",
         autoClose: 3000,
