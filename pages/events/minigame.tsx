@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import Roulette from "@/components/Roulette";
-// const bg = require("/static/images/backgrounds/background-tet-2023-20.jpg");
-
+import dynamic from "next/dynamic";
+const Roulette = dynamic(() => import("@/components/Roulette"), { ssr: false });
 const MiniGame = () => {
   const [inputList, setInputList] = useState([
     {

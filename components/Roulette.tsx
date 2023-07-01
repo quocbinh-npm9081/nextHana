@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
 import AlertDialog from "./LuckyAlertDialog";
+import { useRouter } from "next/router";
 
 const Roulette: React.FC<{ data: any }> = ({ data }) => {
   const [mustSpin, setMustSpin] = useState<boolean>(false);
@@ -9,12 +10,16 @@ const Roulette: React.FC<{ data: any }> = ({ data }) => {
   const [productSelected, setProductSelected] = useState();
   const [open, setOpen] = useState<boolean>(false);
   const [isBlock, setIsBlock] = useState<boolean>(false);
+
   const handleShowResult = () => setOpen(true);
+
   const handleSpinClick = () => {
     const newPrizeNumber = Math.floor(Math.random() * data.length);
     setPrizeNumber(newPrizeNumber);
     setMustSpin(true);
   };
+
+  const router = useRouter();
 
   useEffect(() => {
     if (mustSpin) {
@@ -101,6 +106,15 @@ const Roulette: React.FC<{ data: any }> = ({ data }) => {
         Quay
       </button>
       <AlertDialog open={open} setOpen={setOpen} result={productSelected} />
+
+      <div className="absolute top-5 right-5 inline-flex items-end">
+        <button
+          className="bg-slate-400 hover:bg-black text-black hover:text-white font-bold py-2 px-4 rounded"
+          onClick={() => router.back()}
+        >
+          Trở lại
+        </button>
+      </div>
     </div>
   );
 };
