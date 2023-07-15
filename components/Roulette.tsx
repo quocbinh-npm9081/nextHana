@@ -2,21 +2,57 @@ import React, { useState, useEffect } from "react";
 import { Wheel } from "react-custom-roulette";
 import AlertDialog from "./LuckyAlertDialog";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 
-const Roulette: React.FC<{ data: any }> = ({ data }) => {
+const Roulette: React.FC<{ inputList: any }> = ({ inputList }) => {
+  const [listVoucher, setListVoucher] = useState([]);
   const [mustSpin, setMustSpin] = useState<boolean>(false);
   const [prizeNumber, setPrizeNumber] = useState<number>(0);
-  const [rouletteData, setRouletteData] = useState(data);
+  const [rouletteData, setRouletteData] = useState(inputList);
   const [productSelected, setProductSelected] = useState();
   const [open, setOpen] = useState<boolean>(false);
   const [isBlock, setIsBlock] = useState<boolean>(false);
+  const { data, status } = useSession();
+  useEffect(() => {
+    const getVouchers = async () => {
+      try {
+        const response = await fetch("/api/luckyVouchers");
+        const data = await response.json();
+        const vouchers = data.vouchers.map((voucher: any) => ({
+          id: voucher._id,
+          text: voucher.name,
+        }));
+        setListVoucher(vouchers);
+      } catch (error: any) {
+        console.log("error: ", error);
+      }
+    };
+    getVouchers();
+  }, []);
 
   const handleShowResult = () => setOpen(true);
 
   const handleSpinClick = () => {
-    const newPrizeNumber = Math.floor(Math.random() * data.length);
-    setPrizeNumber(newPrizeNumber);
-    setMustSpin(true);
+    const user = data?.user;
+    const getLuckyOrderVoucher = async () => {
+      const response = await fetch("/api/getLuckyOrderVoucher", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user: user }),
+      });
+      const result = await response.json();
+      if (result) {
+        setIsBlock(true);
+      } else {
+        const newPrizeNumber = Math.floor(Math.random() * listVoucher.length);
+        setPrizeNumber(newPrizeNumber);
+        setMustSpin(true);
+      }
+    };
+    getLuckyOrderVoucher();
   };
 
   const router = useRouter();
@@ -29,21 +65,41 @@ const Roulette: React.FC<{ data: any }> = ({ data }) => {
     if (!mustSpin && productSelected != null) handleShowResult();
   }, [prizeNumber, mustSpin]);
 
-  console.log("productSelected", productSelected);
+  // useEffect(() => {
+  //   console.log("session: ", session?.user);
+  // }, [session, status]);
 
   useEffect(() => {
-    const addShortString = data.map((item: any) => {
-      return {
-        id: item.id,
-        completeOption: item.text,
-        option:
-          item.text.length >= 30
-            ? item.text.substring(0, 30).trimEnd() + "..."
-            : item.text,
-      };
-    });
-    setRouletteData(addShortString);
-  }, [data]);
+    if (listVoucher.length != 0) {
+      const addShortString = listVoucher.map((item: any) => {
+        return {
+          id: item.id,
+          completeOption: item.text,
+          option:
+            item.text.length >= 30
+              ? item.text.substring(0, 30).trimEnd() + "..."
+              : item.text,
+        };
+      });
+      console.log("addShortString: ", addShortString);
+
+      setRouletteData(addShortString);
+    }
+  }, [listVoucher]);
+
+  useEffect(() => {
+    if (isBlock)
+      toast.success("Bạn đã hết lượt !", {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+  }, [isBlock]);
 
   return (
     <div
@@ -58,7 +114,7 @@ const Roulette: React.FC<{ data: any }> = ({ data }) => {
         mustStartSpinning={mustSpin}
         spinDuration={0.2}
         prizeNumber={prizeNumber}
-        data={rouletteData}
+        data={rouletteData.length != 0 ? rouletteData : []}
         outerBorderColor={"#ccc"}
         outerBorderWidth={9}
         innerBorderColor={"#f2f2f2"}

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import dynamic from "next/dynamic";
 const Roulette = dynamic(() => import("@/components/Roulette"), { ssr: false });
 const MiniGame = () => {
+  //dummi data
   const [inputList, setInputList] = useState([
     {
       id: "0xcz",
@@ -40,7 +41,7 @@ const MiniGame = () => {
         height: "100vh",
       }}
     >
-      <Roulette data={inputList} />
+      <Roulette inputList={inputList} />
     </div>
   );
 };
