@@ -36,7 +36,7 @@ const Roulette: React.FC<{ inputList: any }> = ({ inputList }) => {
   const handleSpinClick = () => {
     const user = data?.user;
     const getLuckyOrderVoucher = async () => {
-      const response = await fetch("/api/getLuckyOrderVoucher", {
+      const response = await fetch("/api/getLuckyOrderVoucherByUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -44,12 +44,25 @@ const Roulette: React.FC<{ inputList: any }> = ({ inputList }) => {
         body: JSON.stringify({ user: user }),
       });
       const result = await response.json();
-      if (result) {
-        setIsBlock(true);
-      } else {
+
+      if (result.data == null) {
         const newPrizeNumber = Math.floor(Math.random() * listVoucher.length);
         setPrizeNumber(newPrizeNumber);
         setMustSpin(true);
+      }
+      if (result.data != null) {
+        console.log("result block: ", result);
+        toast.success("Bạn đã hết lượt !", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+        setIsBlock(true);
       }
     };
     getLuckyOrderVoucher();
@@ -81,25 +94,25 @@ const Roulette: React.FC<{ inputList: any }> = ({ inputList }) => {
               : item.text,
         };
       });
-      console.log("addShortString: ", addShortString);
 
       setRouletteData(addShortString);
     }
   }, [listVoucher]);
 
-  useEffect(() => {
-    if (isBlock)
-      toast.success("Bạn đã hết lượt !", {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "dark",
-      });
-  }, [isBlock]);
+  // useEffect(() => {
+  //   if (isBlock) {
+  //     toast.success("Bạn đã hết lượt !", {
+  //       position: "top-right",
+  //       autoClose: 3000,
+  //       hideProgressBar: false,
+  //       closeOnClick: true,
+  //       pauseOnHover: true,
+  //       draggable: true,
+  //       progress: undefined,
+  //       theme: "dark",
+  //     });
+  //   }
+  // }, [isBlock]);
 
   return (
     <div

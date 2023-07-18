@@ -7,7 +7,7 @@ interface IUserSchema {
   isAdmin: boolean;
 }
 
-const userSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema<IUserSchema>(
   {
     name: { type: String, required: true },
     phoneNumber: { type: String, required: true, unique: true },

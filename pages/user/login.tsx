@@ -152,7 +152,7 @@ const Login = () => {
               ""
             )}
           </div>
-          <div className="mb-4 flex flex-row items-center justify-start">
+          {/* <div className="mb-4 flex flex-row items-center justify-start">
             <input
               className="shadow border rounded  py-2 px-3 leading-tight focus:outline-none focus:shadow-outline mr-1"
               id="remember"
@@ -166,7 +166,7 @@ const Login = () => {
             >
               Nhớ tài khoản này
             </label>
-          </div>
+          </div> */}
           <div className="flex items-center justify-between">
             <button className="primary-button mr-4" type="submit">
               Đăng nhập
