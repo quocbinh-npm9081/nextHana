@@ -17,7 +17,6 @@
     "@hookform/resolvers": "^3.1.0",
     "@mui/icons-material": "^5.14.0",
     "@mui/material": "^5.14.0",
-    "@mui/styles": "^5.14.0",
     "@reduxjs/toolkit": "^1.9.3",
     "@types/js-cookie": "^3.0.3",
     "@types/node": "18.15.0",
