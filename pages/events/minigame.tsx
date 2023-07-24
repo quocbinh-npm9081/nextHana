@@ -33,7 +33,7 @@ const MiniGame = () => {
   return (
     <div
       style={{
-        backgroundImage: `url("/static/images/backgrounds/background-tet-2023-20.jpg")`,
+        backgroundImage: `url("/static/images/backgrounds/background-birthday-2023-20.jpg")`,
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",

@@ -30,7 +30,7 @@ export const authOptions: NextAuthOptions = {
         };
         if (!phoneNumber || !password) throw new Error("Invalid credentials !");
         await db.mongoDB.connect();
-        const user = await UserModel.findOne({
+        const user: any = await UserModel.findOne({
           phoneNumber: phoneNumber,
         });
         //add phone number user into Cookie
